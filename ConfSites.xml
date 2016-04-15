@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sites>
+	<site name="Lisieu">
+		<dbinfo>
+			<hostname>localhost</hostname>
+			<port>3306</port>
+			<login>login</login>
+			<password>password</password>
+		</dbinfo>
+		<plan >
+			<path id_zone="0" name="P1">C:\Dev\PConfig\plan\lisieu\P1.jpg</path>
+			<path id_zone="1" name="P2">C:\Dev\PConfig\plan\lisieu\P2.jpg</path>
+			<path id_zone="2" name="P3">C:\Dev\PConfig\plan\lisieu\P3.jpg</path>
+			<path id_zone="3" name="P4">C:\Dev\PConfig\plan\lisieu\P4.jpg</path>
+			<path id_zone="4" name="P5">C:\Dev\PConfig\plan\lisieu\P5.jpg</path>
+		</plan>
+	</site>
+	<site name="Parly">
+		<dbinfo>
+			<hostname>localhost</hostname>
+			<port>3306</port>
+			<login>login</login>
+			<password>password</password>
+		</dbinfo>
+		<plan >
+			<path id_zone="0" name="B1">C:\Dev\PConfig\plan\parly\B1.jpg</path>
+			<path id_zone="1" name="D1">C:\Dev\PConfig\plan\parly\D1.jpg</path>
+		</plan>
+	</site>
+	<site name="SFR">
+		<dbinfo>
+			<hostname>smartsfr.dtdns.net</hostname>
+			<port>12402</port>
+			<login>root</login>
+			<password>Smart2109!</password>
+		</dbinfo>
+		<plan >
+			<path id_zone="0" name="P1_2">C:\Dev\PConfig\plan\SFR\P1_P2_1er_sous_sol.jpg</path>
+			<path id_zone="2" name="P1">C:\Dev\PConfig\plan\SFR\P3_P4_1er_sous_sol.jpg</path>
+			<path id_zone="3" name="P2">C:\Dev\PConfig\plan\SFR\P3_P4_2eme_sous_sol.jpg</path>
+		</plan>
+	</site>
+</sites>

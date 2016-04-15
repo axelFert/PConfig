@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PConfig.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAACAAAAIAAAAAAEAAAABAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PConfig.Conf.Configuration" Collapsed="true">
+    <Position X="13" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAEAAAQAAAACAAAAAACgAAQAAAAAAA=</HashCode>
+      <FileName>Conf\Configuration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.Conf.PlanInfo" Collapsed="true">
+    <Position X="11.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAABAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conf\PlanInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.Model.Constructeur&lt;T&gt;" Collapsed="true">
+    <Position X="2" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Constructeur.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.Model.Multipanel" Collapsed="true">
+    <Position X="6" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAICAAAAAACAAAAAAAAAAAAAAAAEAAAEAAASA=</HashCode>
+      <FileName>Model\Multipanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.Model.Place" Collapsed="true">
+    <Position X="2.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAEAAAAAAAAAAAAAAACAAAAQAAAAAAAEAAAECBYAA=</HashCode>
+      <FileName>Model\Place.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.Model.SmgObj" Collapsed="true">
+    <Position X="4" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIAAogAAAIAACAAEgAgAAAAAAAAEAIAAAAAJAEAAIiA=</HashCode>
+      <FileName>Model\SmgObj.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.Model.Totem" Collapsed="true">
+    <Position X="5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECAIQA=</HashCode>
+      <FileName>Model\Totem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.Model.DAO.MultipanelDAO" Collapsed="true">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAAAAAUAQAAAAAIAAAA=</HashCode>
+      <FileName>Model\DAO\MultipanelDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.Model.DAO.PlaceDAO" Collapsed="true">
+    <Position X="6.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAAACAAAAAAAAIUAQAAAAAIAAAA=</HashCode>
+      <FileName>Model\DAO\PlaceDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.Model.DAO.SmgDao&lt;T&gt;" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Model\DAO\SmgDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.Model.DAO.TotemDAO" Collapsed="true">
+    <Position X="1.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAAACAAAAAAAAAUAQAAAAAIAAAA=</HashCode>
+      <FileName>Model\DAO\TotemDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.Tools.Mysql.MySqlTools" Collapsed="true">
+    <Position X="2.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAEAAAAAAAAAAACAAAICAAACIBAAAIGAAAQAAAAIAA=</HashCode>
+      <FileName>Tools\MySqlTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.Tools.SmgUtil" Collapsed="true">
+    <Position X="2.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAIAAAAEAAgQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tools\SmgUtil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.Tools.EnumUtil" Collapsed="true">
+    <Position X="4.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tools\SmgUtil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.Tools.XmlParser" Collapsed="true">
+    <Position X="0.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAIAAAACAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Tools\XmlParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.View.cbNiveau" Collapsed="true">
+    <Position X="9.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAEAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\cbNiveau.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.View.InfoPanel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAECACAADAAAAgAAAAICAQAAQAAAAAAAAAAEAAgAI=</HashCode>
+      <FileName>View\InfoPanel.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.19" Collapsed="true" />
+  </Class>
+  <Class Name="PConfig.View.LabelValue" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\LabelValue.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PConfig.View.Legende" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAACAAAAAAAAABAAAIAA=</HashCode>
+      <FileName>View\Legende.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PConfig.View.MultiNiveau" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAIAAABCgAUIggAACACAAAIQAQAAAAAIIDAEACIQA=</HashCode>
+      <FileName>View\MultiNiveau.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PConfig.View.Niveau" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAhAIAAABCgAUIAgABCACAAAISAQAAAAAIIBAEACIQA=</HashCode>
+      <FileName>View\Niveau.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PConfig.View.PlaceView" Collapsed="true">
+    <Position X="8.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BEACBAAAAAAAAEACAAAAAAAACIAAAIAADEAABAAACAA=</HashCode>
+      <FileName>View\ObjetPlan\PlaceView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.View.SmgObjView" Collapsed="true">
+    <Position X="10" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAQABAAAgAAgAAAAAAAAIAAAAAICACABAAAgiA=</HashCode>
+      <FileName>View\ObjetPlan\SmgObjView.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PConfig.View.TotemView" Collapsed="true">
+    <Position X="11" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBAABAAAAAAAAAACAAAAAAAAAAAAAIAACAAABAAAAgA=</HashCode>
+      <FileName>View\ObjetPlan\TotemView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.View.Plan" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAEEAICAAAFAABAIAAIAABAgAAAAA=</HashCode>
+      <FileName>View\Plan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.View.PopupConfiguration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAIAQAAEAAAAAAI=</HashCode>
+      <FileName>View\PopupConfiguration.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PConfig.View.ZoomBorder" Collapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAgAAAABYQgCADAAAAAAAAAAAAQCAAAAAAAQAA=</HashCode>
+      <FileName>View\ZoomBorder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.View.Utils.ColorState" Collapsed="true">
+    <Position X="9.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAQAAAAAIAAQAAAAAAAgAA=</HashCode>
+      <FileName>View\Utils\ColorState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PConfig.View.Utils.SmgUtilsIHM" Collapsed="true">
+    <Position X="0.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEABAAAAAABAAAAAAAAACAABAAAAAA=</HashCode>
+      <FileName>View\Utils\SmgUtilsIHM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="PConfig.View.Utils.ETAT_OBJET_PLAN" Collapsed="true">
+    <Position X="7.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAQAAAAIAAAAAQAgAAAAAAABAAAA=</HashCode>
+      <FileName>View\Utils\SmgUtilsIHM.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
