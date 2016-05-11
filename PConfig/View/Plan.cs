@@ -38,7 +38,7 @@ namespace PConfig.View
             LstSmgObjPlan = new List<SmgObjView>();
             Children.Clear();
             ImageBrush imageBrush = new ImageBrush();
-            imageBrush.ImageSource = new BitmapImage(new Uri(fichier, UriKind.Absolute));
+            imageBrush.ImageSource = new BitmapImage(new Uri(fichier, UriKind.RelativeOrAbsolute));
             Width = imageBrush.ImageSource.Width;
             Height = imageBrush.ImageSource.Height;
             Background = imageBrush;
@@ -269,6 +269,11 @@ namespace PConfig.View
                     {
                         obj.ObjSelect(false);
                     }
+                }
+                else
+                {
+                    TotemView tot = child as TotemView;
+                    if (tot != null) tot.ObjSelect(false);
                 }
             }
         }

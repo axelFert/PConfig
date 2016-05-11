@@ -94,7 +94,7 @@ namespace PConfig.View
         {
             if (!multiView)
             {
-                Etat = ETAT_OBJET_PLAN.NONE;
+                Etat = ETAT_OBJET_PLAN.NONE_PLACE;
                 isSelected = false;
             }
             if (sender as TotemView != null)
@@ -111,7 +111,7 @@ namespace PConfig.View
                     if (sender.TotemRadio.Equals(this.TotemRadio))
                     {
                         if (IdPanel == 0)
-                            Etat = ETAT_OBJET_PLAN.NONE;
+                            Etat = ETAT_OBJET_PLAN.NONE_PLACE;
                         else
                         {
                             Etat = ETAT_OBJET_PLAN.COMPTAGE_MULTIPANEL;
@@ -149,7 +149,7 @@ namespace PConfig.View
 
         public void verifRadio(List<int> lstRadioId)
         {
-            Etat = ETAT_OBJET_PLAN.NONE;
+            Etat = ETAT_OBJET_PLAN.NONE_PLACE;
             if (lstRadioId.Contains(TotemRadio))
             {
                 Etat = ETAT_OBJET_PLAN.CONNEXION_RADIO;
@@ -159,7 +159,7 @@ namespace PConfig.View
 
         public void verifComptage(List<int> lstRadioId)
         {
-            Etat = ETAT_OBJET_PLAN.NONE;
+            Etat = ETAT_OBJET_PLAN.NONE_PLACE;
             if (lstRadioId.Contains(TotemRadio))
             {
                 if (IdPanel == 0)
@@ -205,7 +205,7 @@ namespace PConfig.View
             }
             else {
                 isSelected = false;
-                Etat = ETAT_OBJET_PLAN.NONE;
+                Etat = ETAT_OBJET_PLAN.NONE_PLACE;
             }
             UpdateColor();
         }

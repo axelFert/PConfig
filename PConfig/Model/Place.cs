@@ -75,8 +75,9 @@ namespace PConfig.Model
             List<Propriete> lst = new List<Propriete>();
             lst.Add(new Propriete("Pan", ID_pan.ToString()));
             lst.Add(new Propriete("Mac", ID_mac.ToString()));
+            lst.Add(new Propriete("Catégorie", category));
             lst.Add(new Propriete("Totem radio", IdTotemRadio.ToString()));
-            lst.Add(new Propriete("Affichage multipanel ", LstTotemDispalyer.Count.ToString()));
+            lst.Add(new Propriete("Nombre Afficheur multipanel", LstTotemDispalyer.Count.ToString()));
             return lst;
         }
 

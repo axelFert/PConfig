@@ -30,7 +30,7 @@ namespace PConfig.View
         public PlaceDAO PlaceDao { get; set; }
         public MultipanelDAO MultipanelDao { get; set; }
 
-        private InfoPanel infoPanel;
+        public event EventHandler SelectionEventHandler;
 
         //private Legende Legende { get; set; }
 
@@ -51,13 +51,10 @@ namespace PConfig.View
 
             DrawCanvas = new Plan(fileName);
             border.Child = DrawCanvas;
-            infoPanel = new InfoPanel();
-            InfoExpander.Content = infoPanel;
-            InfoExpander.Visibility = Visibility.Hidden;
 
             // ajout d'un event pour la remonter d'info lors du click sur une place
             DrawCanvas.InfoEventHandler += InfoSelectionPlace;
-            infoPanel.OnUpdateEvent += UpdateInterface;
+
             DrawAllObject();
         }
 
@@ -89,6 +86,7 @@ namespace PConfig.View
 
             DrawCanvas.dessinerPlace(LstPlace);
             DrawCanvas.dessinerTotem(LstTotem);
+            //border.Reset();
         }
 
         /// <summary>
@@ -107,7 +105,6 @@ namespace PConfig.View
             LstPlace.Clear();
             LstTotem.Clear();
             LstAllObject.Clear();
-            infoPanel.clearObjet();
         }
 
         public void UpdateAffichage(MODE_AFFICHAGE_OBJET newMode)
@@ -132,26 +129,9 @@ namespace PConfig.View
         private void InfoSelectionPlace(object sender, EventArgs e)
         {
             SmgObjView ObjClicked = sender as SmgObjView;
-
-            if (ObjClicked != null)
+            if (SelectionEventHandler != null)
             {
-                // on parcours tous nos objet
-                foreach (SmgObj obj in LstAllObject)
-                {
-                    // on cherhce l'objet qui correspond a l'objet de dessin
-                    if (ObjClicked.NameObj.Equals(obj.name))
-                    {
-                        if (ObjClicked.isSelected) // l'objet est selectionné on l'ajoute au panneau d'informations
-                            infoPanel.addObj(obj);
-                        else
-                            infoPanel.removeObj(obj); // l'objet est deselectionné on le supprime du paneau d'information
-                    }
-                }
-
-                if (infoPanel.NbObject == 0)
-                    InfoExpander.Visibility = Visibility.Hidden;
-                else
-                    InfoExpander.Visibility = Visibility.Visible;
+                SelectionEventHandler(sender, new EventArgs());
             }
         }
 

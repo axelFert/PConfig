@@ -30,7 +30,7 @@
                     <Button Click="ClearPlaceButton"  Grid.Column="2" Content="Clear place" />
                 </Grid>
             </Expander>
-            <Expander x:Name="InfoExpander" IsExpanded="False" ExpandDirection="Left" HorizontalAlignment="Right" Background="#00000000" Foreground="Black" />
+            <!--<Expander x:Name="InfoExpander" IsExpanded="False" ExpandDirection="Left" HorizontalAlignment="Right" Background="#00000000" Foreground="Black" />-->
         </StackPanel>
     </Grid>
 </UserControl>

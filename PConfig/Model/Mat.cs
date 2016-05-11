@@ -20,6 +20,6 @@ namespace PConfig.Model
 
         public List<Tuple<string, int>> AfficheursId { get; set; }
 
-        public Dictionary<string, Compteur> Afficheurs { get; set; }
+        public Dictionary<string, Compteur> Afficheurs { get; set; } = new Dictionary<string, Compteur>();
     }
 }

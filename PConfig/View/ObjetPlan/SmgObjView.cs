@@ -57,7 +57,7 @@ namespace PConfig.View
             MouseLeftButtonDown += SelectObject;
             text.MouseLeftButtonDown += SelectObject;
             isSelected = false;
-            Etat = ETAT_OBJET_PLAN.NONE;
+            //Etat = ETAT_OBJET_PLAN.NONE;
         }
 
         /// <summary>

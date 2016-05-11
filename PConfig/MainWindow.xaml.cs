@@ -77,10 +77,11 @@ namespace PConfig
                         couleur = new ColorState(values, Color.FromArgb(155, 0, 255, 0), Colors.Green);
                         break;
 
-                    case ETAT_OBJET_PLAN.COMPTAGE_COMPLEX:
-                    case ETAT_OBJET_PLAN.NONE:
+                    case ETAT_OBJET_PLAN.NONE_PLACE:
+                    case ETAT_OBJET_PLAN.NONE_TOTEM:
+
                     default:
-                        couleur = new ColorState(values, Color.FromArgb(0, 0, 255, 0), Colors.Black);
+                        couleur = new ColorState(values, Color.FromArgb(0, 0, 255, 0), Colors.White);
                         break;
                 }
 

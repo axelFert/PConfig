@@ -91,6 +91,22 @@ namespace PConfig.Tools.Mysql
             }
         }
 
+        public bool CanConnect()
+        {
+            using (MySqlConnection connection = new MySqlConnection(myConnection))
+            {
+                try
+                {
+                    connection.Open();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
         public static void init(string _host, string _port, string _login, string _mdp, string _dbName)
         {
             isInitialized = true;

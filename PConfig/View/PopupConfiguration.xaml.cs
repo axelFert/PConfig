@@ -1,5 +1,6 @@
 ﻿using PConfig.Conf;
 using PConfig.Tools;
+using PConfig.Tools.Mysql;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,7 +30,7 @@ namespace PConfig.View
             localConf.Port = "3306";
             localConf.Login = "root";
             localConf.Password = "";
-            comboConf.Items.Add(localConf);
+            //comboConf.Items.Add(localConf);
             foreach (Configuration conf in lstConf)
             {
                 comboConf.Items.Add(conf);
@@ -63,6 +64,14 @@ namespace PConfig.View
             selectedConf.Login = TxtLogin.Text;
             selectedConf.Password = TxtPassword.Text;
             selectedConf.Port = TxtPort.Text;
+
+            MySqlTools.init(selectedConf.HostName, selectedConf.Port, selectedConf.Login, selectedConf.Password, "db_smg_masterdata");
+            if (!MySqlTools.getConnection().CanConnect())
+            {
+                MessageBox.Show("Impossible de se connecter à la base", "Erreur de connexion");
+                return;
+            }
+
             foreach (var cb in LstPlan.Children)
             {
                 cbNiveau niveau = cb as cbNiveau;

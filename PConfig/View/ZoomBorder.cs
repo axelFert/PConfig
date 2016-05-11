@@ -68,6 +68,18 @@ namespace PConfig.View
                 st.ScaleX = 1.0;
                 st.ScaleY = 1.0;
 
+                if (child as Canvas != null)
+                {
+                    int height = (int)(child as Canvas).Height;
+                    int width = (int)(child as Canvas).Width;
+                    double scalexCalc = this.ActualWidth / width;
+                    double scaleyCalc = this.ActualHeight / height;
+
+                    double zoom = scalexCalc < scaleyCalc ? scalexCalc : scaleyCalc;
+                    st.ScaleX = zoom;
+                    st.ScaleY = zoom;
+                }
+
                 // reset pan
                 var tt = GetTranslateTransform(child);
                 tt.X = 0.0;

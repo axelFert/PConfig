@@ -27,6 +27,8 @@ namespace PConfig.Model
         public override void InitObj()
         {
             calculSize();
+            PlaceRadio = new List<Place>();
+            PlaceAffiche = new List<Place>();
             string totem = ID_pan + "" + (ID_mac & SmgUtil.MASQUE_TOTEM_RADIO_MAC);
             IdTotemRadio = int.Parse(totem);
         }
@@ -45,6 +47,8 @@ namespace PConfig.Model
             lst.Add(new Propriete("Id totem", ID_panels.ToString()));
             lst.Add(new Propriete("Pan", ID_pan.ToString()));
             lst.Add(new Propriete("Mac", ID_mac.ToString()));
+            lst.Add(new Propriete("nombre place radio", PlaceRadio.Count.ToString()));
+            lst.Add(new Propriete("nombre place comptées", PlaceAffiche.Count.ToString()));
 
             return lst;
         }
@@ -56,7 +60,7 @@ namespace PConfig.Model
 
         public string getType()
         {
-            return "Place";
+            return "Totem";
         }
     }
 }

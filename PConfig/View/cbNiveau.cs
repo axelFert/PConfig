@@ -13,8 +13,8 @@ namespace PConfig.View
         public cbNiveau(int numero, string nom, string path)
         {
             IdZone = numero; Nom = nom; Path = path;
-            Name = Nom;
             Content = Nom;
+            Name = Nom.Replace(' ', '_');
             Margin = new Thickness(0, 5, 5, 0);
             IsChecked = true;
         }

@@ -15,6 +15,7 @@
             <RowDefinition Height="70" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <ProgressBar Minimum="0" Maximum="100" Name="pbStatus" IsIndeterminate="True" Visibility="Hidden" Grid.ColumnSpan="2" />
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5" Background="White">
             <GroupBox Header="Lien totem-grains" FontSize="15" Margin=" 0,0,10,0">
                 <GroupBox.BorderBrush>
@@ -72,7 +73,7 @@
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
-            <Button x:Name="BoutonNegatif" Content="Negatif" Width="75" Height="25"  Margin="0,20" Click="BoutonNegatif_Click" />
+            <Button x:Name="BoutonNegatif" Content="Negatif" Width="75" Height="25"  Margin="0,20" Click="BoutonNegatif_Click" Visibility="Hidden" />
         </StackPanel>
         <TabControl Name="Niveaux" Grid.Row="1" Grid.Column="0" FontSize="15">
         </TabControl>

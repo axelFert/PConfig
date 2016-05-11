@@ -31,6 +31,7 @@ namespace PConfig.View
         public void updateAffichage()
         {
             PropertiesStack.Children.Clear();
+            if (ObjetLegende == null) return;
             NomObjet.Content = ObjetLegende.getType() + " : " + ObjetLegende.getNom();
 
             foreach (Propriete prop in ObjetLegende.GetInfo())

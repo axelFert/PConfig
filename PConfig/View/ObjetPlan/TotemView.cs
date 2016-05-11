@@ -60,7 +60,7 @@ namespace PConfig.View
         {
             if (!multiView)
             {
-                Etat = ETAT_OBJET_PLAN.NONE;
+                Etat = ETAT_OBJET_PLAN.NONE_TOTEM;
                 isSelected = false;
             }
 
@@ -128,6 +128,20 @@ namespace PConfig.View
                     break;
             }
             this.text.Content = valeurAffichage;
+        }
+
+        public void ObjSelect(bool select)
+        {
+            if (select)
+            {
+                isSelected = true;
+                Etat = ETAT_OBJET_PLAN.COMPTAGE_MULTIPANEL;
+            }
+            else {
+                isSelected = false;
+                Etat = ETAT_OBJET_PLAN.NONE_TOTEM;
+            }
+            UpdateColor();
         }
 
         public override void UpdateColor()

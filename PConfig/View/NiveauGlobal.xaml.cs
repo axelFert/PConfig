@@ -23,6 +23,10 @@ namespace PConfig.View
 
         private List<Multipanel> LstMultiPanel { get; set; }
 
+        public event EventHandler SelectionEventHandler;
+
+        private List<ZoomBorder> lstZoom = new List<ZoomBorder>();
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(NiveauGlobal));
 
         /// <summary>
@@ -37,7 +41,7 @@ namespace PConfig.View
             LstTotem = lstTotem;
             AllPlan = new List<Plan>();
 
-            int nblevel = (int)Math.Sqrt(niveau.Count) + 1;
+            int nblevel = (int)Math.Ceiling(Math.Sqrt(niveau.Count));
 
             for (int i = 0; i < nblevel; i++)
             {
@@ -67,6 +71,8 @@ namespace PConfig.View
                         plan.IdZone = niv.Zone;
                         plan.InfoEventHandler += InfoSelectionPlace;
                         zm.Child = plan;
+
+                        lstZoom.Add(zm);
 
                         Grid.SetRow(zm, countrow);
                         Grid.SetColumn(zm, i);
@@ -112,6 +118,7 @@ namespace PConfig.View
                     }
                 }
             }
+            //lstZoom.ForEach(zm => zm.Reset());
         }
 
         /// <summary>
@@ -169,6 +176,10 @@ namespace PConfig.View
         private void InfoSelectionPlace(object sender, EventArgs e)
         {
             AllPlan.ForEach(pln => pln.UpdatePlan(sender, e));
+            if (SelectionEventHandler != null)
+            {
+                SelectionEventHandler(sender, new EventArgs());
+            }
         }
 
         public void updateViewCompteur(Compteur cpt)

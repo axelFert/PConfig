@@ -8,6 +8,7 @@ using PConfig.View.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -64,6 +65,7 @@ namespace PConfig.View
             LstAllObject.AddRange(LstTotem);
             LstMultiPanel = MultipanelDao.getAll();
             LstPlace = AssociationPlaceMultipanel(LstPlace, LstMultiPanel);
+            AssocierPlaceTotem();
         }
 
         private List<Place> AssociationPlaceMultipanel(List<Place> lstPlace, List<Multipanel> lstMulti)
@@ -86,7 +88,17 @@ namespace PConfig.View
         {
             foreach (Totem tot in LstTotem)
             {
-                tot.
+                foreach (Place pl in LstPlace)
+                {
+                    if (tot.IdTotemRadio == pl.IdTotemRadio)
+                    {
+                        tot.PlaceRadio.Add(pl);
+                    }
+                    if (pl.LstTotemDispalyer.ContainsKey(tot.ID_panels) || (tot.IdTotemRadio == pl.IdTotemRadio && pl.ID_panels != 0))
+                    {
+                        tot.PlaceAffiche.Add(pl);
+                    }
+                }
             }
         }
 
@@ -97,8 +109,9 @@ namespace PConfig.View
             LstAllObject.Clear();
         }
 
-        public void chargerConf(Configuration conf)
+        public async void chargerConf(Configuration conf)
         {
+            pbStatus.Visibility = System.Windows.Visibility.Visible;
             string db = (conf.isOnMasterData ? "db_smg_masterdata" : "db_smg_run");
             MySqlTools.init(conf.HostName, conf.Port, conf.Login, conf.Password, db);
             //on clear les niveaux déjà présents
@@ -107,7 +120,10 @@ namespace PConfig.View
             List<Level> lstLvl = LevelDAO.getInstance().getAll();
 
             //recup place
-            getAllObject();
+            await Task.Run(() =>
+            {
+                getAllObject();
+            });
             CreationCompteur();
             populateTreeObj();
 
@@ -117,6 +133,7 @@ namespace PConfig.View
             TabItem tabGlobalBis = new TabItem();
             tabGlobalBis.Header = "Site Complet";
             NiveauGlobal NivGlobal = new NiveauGlobal(conf.ListePlan, LstAllObject, LstPlace, LstTotem);
+            NivGlobal.SelectionEventHandler += SelectionObjectTree;
             tabGlobalBis.Content = NivGlobal;
             Niveaux.Items.Add(tabGlobalBis);
             LstNiveaux.Add(NivGlobal);
@@ -127,10 +144,18 @@ namespace PConfig.View
                 TabItem tab = new TabItem();
                 tab.Header = planInfo.Nom;
                 Niveau niv = new Niveau(planInfo.Path, planInfo.Nom, planInfo.Zone, LstAllObject.Where(obj => obj.ID_zone.Equals(planInfo.Zone)).ToList());
+                niv.SelectionEventHandler += SelectionObjectTree;
                 tab.Content = niv;
                 Niveaux.Items.Add(tab);
                 LstNiveaux.Add(niv);
             }
+            TabItem confTab = new TabItem();
+            confTab.Header = "Configuration";
+            ConfigurationTab cnf = new ConfigurationTab();
+            cnf.OnChangeColor += ColorChanged;
+            confTab.Content = cnf;
+            Niveaux.Items.Add(confTab);
+            pbStatus.Visibility = System.Windows.Visibility.Hidden;
         }
 
         #region IHM
@@ -211,7 +236,6 @@ namespace PConfig.View
 
             foreach (Mat mat in LstMat)
             {
-                mat.Afficheurs = new Dictionary<string, Compteur>();
                 foreach (Tuple<string, int> tpl in mat.AfficheursId)
                 {
                     foreach (Compteur cp in LstCompteur)
@@ -225,6 +249,16 @@ namespace PConfig.View
             }
         }
 
+        public void ColorChanged(object sender, EventArgs e)
+        {
+            redrawAllPlace();
+        }
+
+        public void redrawAllPlace()
+        {
+            LstNiveaux.ForEach(niv => niv.UpdateColor());
+        }
+
         #endregion IHM
 
         private void populateTreeObj()
@@ -236,7 +270,6 @@ namespace PConfig.View
                 TreeViewItem totemHead = new TreeViewItem();
                 totemHead.Header = "Totem";
                 ParkingObject.Items.Add(totemHead);
-                //LstTotem.Sort((emp1, emp2) => emp1.IdTotemRadio.CompareTo(emp2.IdTotemRadio));
                 foreach (Totem tot in LstTotem)
                 {
                     TotemTreeItem tree = new TotemTreeItem(tot, LstPlace.Where(pl => pl.IdTotemRadio == tot.IdTotemRadio).ToList());
@@ -267,7 +300,7 @@ namespace PConfig.View
             if (LstMat.Count > 0)
             {
                 TreeViewItem PanelHead = new TreeViewItem();
-                PanelHead.Header = "Panel";
+                PanelHead.Header = "Mat";
                 ParkingObject.Items.Add(PanelHead);
                 foreach (Mat mat in LstMat)
                 {
@@ -320,23 +353,35 @@ namespace PConfig.View
             {
                 // selection de toutes les places de ce type
                 LstNiveaux.ForEach(niv => niv.SelectionTypePlace(selection.Header.ToString()));
+                InformationPanel.ObjetLegende = null;
+                InformationPanel.updateAffichage();
             }
         }
 
         private void BoutonNegatif_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             ColorState colors = null;
+            ColorState colorsPlace = null;
             if (SmgUtilsIHM.IS_NEGATIF)
-                colors = new ColorState(ETAT_OBJET_PLAN.NONE, Color.FromArgb(0, 0, 255, 0), Colors.Black);
+            {
+                colorsPlace = new ColorState(ETAT_OBJET_PLAN.NONE_PLACE, Color.FromArgb(0, 0, 255, 0), Colors.Black);
+                colors = new ColorState(ETAT_OBJET_PLAN.NONE_TOTEM, Color.FromArgb(0, 0, 255, 0), Colors.Black);
+            }
             else
-                colors = new ColorState(ETAT_OBJET_PLAN.NONE, Color.FromArgb(0, 0, 255, 0), Colors.White);
+            {
+                colorsPlace = new ColorState(ETAT_OBJET_PLAN.NONE_PLACE, Color.FromArgb(0, 0, 255, 0), Colors.White);
+                colors = new ColorState(ETAT_OBJET_PLAN.NONE_PLACE, Color.FromArgb(0, 0, 255, 0), Colors.Black);
+            }
 
             SmgUtilsIHM.IS_NEGATIF = !SmgUtilsIHM.IS_NEGATIF;
 
-            SmgUtilsIHM.LIST_COULEUR_ETAT.Remove(ETAT_OBJET_PLAN.NONE);
-            SmgUtilsIHM.LIST_COULEUR_ETAT.Add(colors.Etat, colors);
+            SmgUtilsIHM.LIST_COULEUR_ETAT[ETAT_OBJET_PLAN.NONE_PLACE] = colorsPlace;
+            //SmgUtilsIHM.LIST_COULEUR_ETAT.Add(colorsPlace.Etat, colorsPlace);
 
-            LstNiveaux.ForEach(niv => niv.UpdateColor());
+            SmgUtilsIHM.LIST_COULEUR_ETAT[ETAT_OBJET_PLAN.NONE_TOTEM] = colors;
+            //SmgUtilsIHM.LIST_COULEUR_ETAT.Add(colors.Etat, colors);
+
+            redrawAllPlace();
         }
 
         private void Radio_Checked(object sender, System.Windows.RoutedEventArgs e)
@@ -347,6 +392,62 @@ namespace PConfig.View
         private void Comptage_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
             SmgUtilsIHM.IS_RADIO_LINK = false;
+        }
+
+        private void SelectionObjectTree(object sender, EventArgs e)
+        {
+            if ((sender as SmgObjView) != null)
+            {
+                int pan = (sender as SmgObjView).Pan;
+                int mac = (sender as SmgObjView).Mac;
+
+                foreach (TreeViewItem Superobj in ParkingObject.Items)
+                {
+                    foreach (var obj in Superobj.Items)
+                    {
+                        // on parcours tout les item du tree
+                        TreeViewItem selection = (TreeViewItem)obj;
+                        if (selection as TotemTreeItem != null) // cas d'un totem
+                        {
+                            Totem tot = (selection as TotemTreeItem).Totem;
+                            if (tot.ID_pan == pan && tot.ID_mac == (mac & SmgUtil.MASQUE_TOTEM_RADIO_MAC))
+                            {
+                                if (mac == tot.ID_mac)
+                                {
+                                    selection.IsSelected = true;
+                                    return;
+                                }
+                                else
+                                {
+                                    selection.IsExpanded = true;
+                                    foreach (var obj2 in selection.Items)
+                                    {
+                                        TreeViewItem place = (TreeViewItem)obj2;
+                                        if (place as PlaceTreeItem != null)
+                                        {
+                                            Place pl = (place as PlaceTreeItem).Place;
+                                            if (pl.ID_mac == mac)
+                                            {
+                                                place.IsSelected = true;
+                                                return;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else if (selection as PlaceTreeItem != null)
+                        {
+                            Place pl = (selection as PlaceTreeItem).Place;
+                            if (pl.ID_mac == mac && pl.ID_pan == pan)
+                            {
+                                selection.IsSelected = true;
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
