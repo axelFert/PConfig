@@ -43,16 +43,12 @@ namespace PConfig.View.ObjetPlan
             TotemRadio = place.IdTotemRadio;
 
             Category = place.category;
-
             Id = place.Numero;
-
             NameObj = place.name;
-
             IdPanel = place.ID_panels;
-
             LstTotemDispalyer = place.LstTotemDispalyer;
             text.Content = Category;
-
+            Etat = ETAT_OBJET_PLAN.NONE_TOTEM;
             initObjetGraphique(place);
             text.FontSize = (Height / 3) * 72 / 96;
         }

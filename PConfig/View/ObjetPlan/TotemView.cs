@@ -29,10 +29,10 @@ namespace PConfig.View.ObjetPlan
             NameObj = totem.name;
             this.Pan = totem.ID_pan;
             this.Mac = totem.ID_mac;
-
             this.TotemRadio = totem.IdTotemRadio;
             IdPanel = totem.ID_panels;
             text.Content = IdPanel;
+            Etat = ETAT_OBJET_PLAN.NONE_TOTEM;
             initObjetGraphique();
         }
 

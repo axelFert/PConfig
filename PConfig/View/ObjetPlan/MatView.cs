@@ -35,9 +35,14 @@ namespace PConfig.View.ObjetPlan
             Pan = mat.ID_pan;
             Mac = mat.ID_mac;
             TotemRadio = mat.IdTotemRadio;
-
             lstPanMac = mat.Afficheurs.Values.ToList().SelectMany(cp => cp.LstPanMac).ToList();
 
+            Etat = ETAT_OBJET_PLAN.NONE_MAT;
+            initObjetGraphique(mat);
+        }
+
+        private void initObjetGraphique(Mat mat)
+        {
             this.sommetA = new Point(mat.XCentre, mat.YCentre - (mat.TailleCote * 2 / 3));
             this.sommetB = new Point(mat.XCentre + (mat.TailleCote / 2), mat.YCentre + (mat.TailleCote / 3));
             this.sommetC = new Point(mat.XCentre - (mat.TailleCote / 2), mat.YCentre + (mat.TailleCote / 3));
@@ -63,11 +68,7 @@ namespace PConfig.View.ObjetPlan
 
             figure.Segments.Add(l1);
             figure.Segments.Add(l2);
-            initObjetGraphique();
-        }
 
-        private void initObjetGraphique()
-        {
             Stroke = new SolidColorBrush(Colors.Yellow);
             Fill = new SolidColorBrush(Color.FromArgb(150, 0, 150, 0));
             StrokeThickness = 2;

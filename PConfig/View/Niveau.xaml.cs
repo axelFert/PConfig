@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace PConfig.View
 {
@@ -57,6 +58,13 @@ namespace PConfig.View
             DrawCanvas.InfoEventHandler += InfoSelectionPlace;
 
             DrawAllObject();
+
+            Loaded += Niveau_Loaded;
+        }
+
+        private void Niveau_Loaded(object sender, RoutedEventArgs e)
+        {
+            border.Reset();
         }
 
         #region Dessin

@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace PConfig.View
 {
@@ -56,7 +58,13 @@ namespace PConfig.View
                 MouseMove += child_MouseMove;
                 PreviewMouseRightButtonDown += new MouseButtonEventHandler(
                   child_PreviewMouseRightButtonDown);
+                Loaded += ZoomBorder_Loaded;
             }
+        }
+
+        private void ZoomBorder_Loaded(object sender, RoutedEventArgs e)
+        {
+            Reset();
         }
 
         public void Reset()
