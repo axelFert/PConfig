@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:PConfig.View"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="900">
     <Grid>
@@ -71,6 +72,18 @@
                         <RadioButton Name="verif" GroupName="db" Content="Vérification" Margin="0,0,15,0" IsChecked="True" />
                         <RadioButton Name ="creation" GroupName="db" Content="création" IsEnabled="False" ToolTip="disponible dans une nouvelle version" />
                     </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Police" FontSize="15" Margin=" 0,0,10,0">
+                <GroupBox.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0" />
+                        <GradientStop Color="#FF2A8AE4" Offset="1" />
+                    </LinearGradientBrush>
+                </GroupBox.BorderBrush>
+                <StackPanel Orientation="Horizontal">
+                    <Label>Police</Label>
+                    <xctk:IntegerUpDown Name="taillePolice" Height="22" ValueChanged="UpdatePolice" Minimum="1" Maximum="25" ></xctk:IntegerUpDown>
                 </StackPanel>
             </GroupBox>
             <Button x:Name="BoutonNegatif" Content="Negatif" Width="75" Height="25"  Margin="0,20" Click="BoutonNegatif_Click" Visibility="Hidden" />

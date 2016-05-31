@@ -1,18 +1,8 @@
 ﻿using PConfig.View.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PConfig.View
 {
@@ -33,6 +23,7 @@ namespace PConfig.View
 
         private void UpdateTotemColor(object sender, RoutedEventArgs e)
         {
+            if ((Color)CouleurPickerTotem.SelectedColor == null) return;
             SmgUtilsIHM.getColorEtat(ETAT_OBJET_PLAN.NONE_TOTEM).CouleurBordure = (Color)CouleurPickerTotem.SelectedColor;
             if (OnChangeColor != null)
             {
@@ -42,7 +33,18 @@ namespace PConfig.View
 
         private void UpdatePlaceColor(object sender, RoutedEventArgs e)
         {
+            if ((Color)CouleurPickerPlace.SelectedColor == null) return;
             SmgUtilsIHM.getColorEtat(ETAT_OBJET_PLAN.NONE_PLACE).CouleurBordure = (Color)CouleurPickerPlace.SelectedColor;
+            if (OnChangeColor != null)
+            {
+                OnChangeColor(this, new EventArgs());
+            }
+        }
+
+        private void UpdateMatColor(object sender, RoutedEventArgs e)
+        {
+            if ((Color)CouleurPickerMat.SelectedColor == null) return;
+            SmgUtilsIHM.getColorEtat(ETAT_OBJET_PLAN.NONE_MAT).CouleurBordure = (Color)CouleurPickerMat.SelectedColor;
             if (OnChangeColor != null)
             {
                 OnChangeColor(this, new EventArgs());

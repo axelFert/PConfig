@@ -17,16 +17,12 @@ namespace PConfig.View.Utils
             return LIST_COULEUR_ETAT[etat];
         }
 
-        public static int EPAISSEUR_TRAIT = 2;
+        public static int EPAISSEUR_TRAIT = 1;
+        public static int TAILLE_POLICE = 1;
 
         public static bool IS_NEGATIF = false;
 
         public static bool IS_RADIO_LINK = false;
-
-        internal static ColorState getColorEtat(object etat)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     /// <summary>
@@ -35,7 +31,8 @@ namespace PConfig.View.Utils
     /// </summary>
     public enum ETAT_OBJET_PLAN
     {
-        NONE_PLACE, NONE_TOTEM, CONNEXION_RADIO, COMPTAGE_RADIO, COMPTAGE_MULTIPANEL, COMPTAGE_COMPLEX, ELEMENT_LIE
+        NONE_PLACE, NONE_TOTEM, CONNEXION_RADIO, COMPTAGE_RADIO, COMPTAGE_MULTIPANEL, COMPTAGE_COMPLEX, ELEMENT_LIE,
+        NONE_MAT
     }
 
     public enum MODE_AFFICHAGE_OBJET

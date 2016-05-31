@@ -1,4 +1,5 @@
 ﻿using PConfig.Model;
+using PConfig.View.ObjetPlan;
 using PConfig.View.Utils;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace PConfig.View
+namespace PConfig.View.ObjetPlan
 {
     public class PlaceView : SmgObjView
     {
@@ -17,8 +18,6 @@ namespace PConfig.View
         public Point Corner { get; set; }
 
         public bool isHighlighted { get; set; }
-
-        public event EventHandler SelectionPlace;
 
         public string Category { get; }
 
@@ -72,22 +71,13 @@ namespace PConfig.View
             SetValue(Canvas.LeftProperty, Corner.X);
             SetValue(Canvas.TopProperty, Corner.Y);
 
-            text.SetValue(Canvas.LeftProperty, Corner.X + 1);
+            text.SetValue(Canvas.LeftProperty, Corner.X);
             text.SetValue(Canvas.TopProperty, Corner.Y);
 
             LayoutTransform = new RotateTransform(Angle);
             text.LayoutTransform = new RotateTransform(Angle);
 
             UpdateColor();
-        }
-
-        protected override void SelectObject(object sender, RoutedEventArgs e)
-        {
-            isSelected = !isSelected;
-            if (SelectionPlace != null)
-            {
-                SelectionPlace(this, new EventArgs());
-            }
         }
 
         public override void UpdateState(SmgObjView sender, bool multiView)
@@ -125,7 +115,7 @@ namespace PConfig.View
                     }
                 }
             }
-            else
+            else if (sender as PlaceView != null)
             {
                 if (sender == this)
                 {
@@ -141,6 +131,24 @@ namespace PConfig.View
                             Etat = ETAT_OBJET_PLAN.ELEMENT_LIE;
                             isSelected = true;
                         }
+                    }
+                }
+            }
+            else if ((sender as MatView) != null)
+            {
+                if (SmgUtilsIHM.IS_RADIO_LINK)
+                {
+                    if (sender.TotemRadio.Equals(this.TotemRadio))
+                    {
+                        Etat = ETAT_OBJET_PLAN.COMPTAGE_RADIO;
+                        isSelected = true;
+                    }
+                }
+                else {
+                    if ((sender as MatView).lstPanMac.Contains(Pan + "/" + Mac))
+                    {
+                        Etat = ETAT_OBJET_PLAN.COMPTAGE_MULTIPANEL;
+                        isSelected = true;
                     }
                 }
             }
@@ -219,6 +227,7 @@ namespace PConfig.View
                 Stroke = new SolidColorBrush(colors.CouleurBordure);
                 StrokeThickness = SmgUtilsIHM.EPAISSEUR_TRAIT;
                 text.Foreground = new SolidColorBrush(colors.CouleurBordure);
+                //text.FontSize = SmgUtilsIHM.TAILLE_POLICE;
             }
         }
     }

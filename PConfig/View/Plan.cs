@@ -1,4 +1,5 @@
 ﻿using PConfig.Model;
+using PConfig.View.ObjetPlan;
 using PConfig.View.Utils;
 using System;
 using System.Collections.Generic;
@@ -55,8 +56,7 @@ namespace PConfig.View
             foreach (Place place in lstPlace)
             {
                 PlaceView placeV = new PlaceView(place);
-
-                placeV.SelectionPlace += new EventHandler(PlaceSelectionEventHandler);
+                placeV.SelectionObj += new EventHandler(PlaceSelectionEventHandler);
                 Children.Add(placeV);
                 Children.Add(placeV.text);
                 LstSmgObjPlan.Add(placeV);
@@ -70,7 +70,7 @@ namespace PConfig.View
         public void dessinerPlace(Place place)
         {
             PlaceView placeV = new PlaceView(place);
-            placeV.SelectionPlace += new EventHandler(PlaceSelectionEventHandler);
+            placeV.SelectionObj += new EventHandler(PlaceSelectionEventHandler);
             Children.Add(placeV);
             Children.Add(placeV.text);
             LstSmgObjPlan.Add(placeV);
@@ -85,7 +85,7 @@ namespace PConfig.View
             foreach (Totem tot in lstTotem)
             {
                 TotemView totem = new TotemView(tot);
-                totem.SelectionTotem += new EventHandler(PlaceSelectionEventHandler);
+                totem.SelectionObj += new EventHandler(PlaceSelectionEventHandler);
                 Children.Add(totem);
                 Children.Add(totem.text);
                 LstSmgObjPlan.Add(totem);
@@ -99,10 +99,27 @@ namespace PConfig.View
         public void dessinerTotem(Totem tot)
         {
             TotemView totem = new TotemView(tot);
-            totem.SelectionTotem += new EventHandler(PlaceSelectionEventHandler);
+            totem.SelectionObj += new EventHandler(PlaceSelectionEventHandler);
             Children.Add(totem);
             Children.Add(totem.text);
             LstSmgObjPlan.Add(totem);
+        }
+
+        public void DessinerSmgObj(SmgObj obj)
+        {
+            if (obj.ID_zone != IdZone) return;
+            SmgObjView dessin = null;
+            if ((obj as Place) != null)
+                dessin = new PlaceView((obj as Place));
+            else if ((obj as Totem) != null)
+                dessin = new TotemView((obj as Totem));
+            else if ((obj as Mat) != null)
+                dessin = new MatView((obj as Mat));
+
+            dessin.SelectionObj += new EventHandler(PlaceSelectionEventHandler);
+            Children.Add(dessin);
+            Children.Add(dessin.text);
+            LstSmgObjPlan.Add(dessin);
         }
 
         /// <summary>

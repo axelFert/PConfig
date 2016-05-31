@@ -79,7 +79,7 @@ namespace PConfig
 
                     case ETAT_OBJET_PLAN.NONE_PLACE:
                     case ETAT_OBJET_PLAN.NONE_TOTEM:
-
+                    case ETAT_OBJET_PLAN.NONE_MAT:
                     default:
                         couleur = new ColorState(values, Color.FromArgb(0, 0, 255, 0), Colors.White);
                         break;

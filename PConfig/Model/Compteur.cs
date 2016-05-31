@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace PConfig.Model.DAO
+namespace PConfig.Model
 {
     public class Compteur : ILegendObject
     {

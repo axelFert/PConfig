@@ -1,5 +1,6 @@
 ﻿using PConfig.Model;
 using PConfig.Model.DAO;
+using PConfig.View.ObjetPlan;
 using PConfig.View.Utils;
 using System;
 using System.Collections.Generic;

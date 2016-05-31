@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="PConfig.View.ConfigurationTab"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:PConfig.View"
@@ -12,13 +12,19 @@
             <GroupBox Header="Configuration couleur">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <Label Grid.Column="0">Couleur Totem</Label>
+                        <Label Grid.Column="0" Width="120">Couleur Mat</Label>
+                        <xctk:ColorPicker Name="CouleurPickerMat" Width="100"></xctk:ColorPicker>
+                        <Button Grid.Column="2" Name="ChangeMatColor" Click="UpdatePlaceColor">Appliquer</Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Label Grid.Column="0" Width="120">Couleur Totem</Label>
                         <xctk:ColorPicker Name="CouleurPickerTotem" Width="100" />
                         <Button Grid.Column="2" Name="ChangeTotemColor" Click="UpdateTotemColor">Appliquer</Button>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
-                        <Label Grid.Column="0">Couleur Place</Label>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Label Grid.Column="0" Width="120">Couleur Place</Label>
                         <xctk:ColorPicker Name="CouleurPickerPlace" Width="100"></xctk:ColorPicker>
                         <Button Grid.Column="2" Name="ChangePlaceColor" Click="UpdatePlaceColor">Appliquer</Button>
                     </StackPanel>

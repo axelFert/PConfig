@@ -1,9 +1,11 @@
 ﻿using PConfig.Conf;
 using PConfig.Model;
 using PConfig.Model.DAO;
+using PConfig.View.ObjetPlan;
 using PConfig.View.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -100,25 +102,7 @@ namespace PConfig.View
 
         private void DrawAllObject()
         {
-            foreach (Plan plan in AllPlan)
-            {
-                foreach (Place place in LstPlace)
-                {
-                    if (place.ID_zone == plan.IdZone)
-                    {
-                        plan.dessinerPlace(place);
-                    }
-                }
-
-                foreach (Totem totem in LstTotem)
-                {
-                    if (totem.ID_zone == plan.IdZone)
-                    {
-                        plan.dessinerTotem(totem);
-                    }
-                }
-            }
-            //lstZoom.ForEach(zm => zm.Reset());
+            AllPlan.ForEach(pl => LstAllObject.ForEach(obj => pl.DessinerSmgObj(obj)));
         }
 
         /// <summary>

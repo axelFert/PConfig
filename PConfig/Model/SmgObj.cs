@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PConfig.Model
+﻿namespace PConfig.Model
 {
     /// <summary>
     /// Class abstraite SMG represenatant les motes/totem depuis la table db_smg_run tblmotes

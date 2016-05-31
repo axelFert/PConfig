@@ -1,5 +1,4 @@
-﻿using PConfig.Model.DAO;
-using System;
+﻿using PConfig.Model;
 using System.Windows.Controls;
 
 namespace PConfig.View.TreeItem

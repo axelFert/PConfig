@@ -1,6 +1,7 @@
 ﻿using PConfig.Tools;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PConfig.Model
 {
@@ -32,6 +33,8 @@ namespace PConfig.Model
         public double Angle { get; set; }
 
         public Dictionary<int, int> LstTotemDispalyer { get; set; }
+
+        public int NumeroTotemRadio { get; set; }
 
         #endregion Declaration
 
@@ -76,8 +79,10 @@ namespace PConfig.Model
             lst.Add(new Propriete("Pan", ID_pan.ToString()));
             lst.Add(new Propriete("Mac", ID_mac.ToString()));
             lst.Add(new Propriete("Catégorie", category));
-            lst.Add(new Propriete("Totem radio", IdTotemRadio.ToString()));
+            lst.Add(new Propriete("Totem radio", NumeroTotemRadio.ToString()));
             lst.Add(new Propriete("Nombre Afficheur multipanel", LstTotemDispalyer.Count.ToString()));
+            lst.Add(new Propriete("Afficheurs", string.Join(",", LstTotemDispalyer.Keys.ToArray())));
+
             return lst;
         }
 

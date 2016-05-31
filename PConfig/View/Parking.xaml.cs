@@ -3,6 +3,7 @@ using PConfig.Model;
 using PConfig.Model.DAO;
 using PConfig.Tools;
 using PConfig.Tools.Mysql;
+using PConfig.View.ObjetPlan;
 using PConfig.View.TreeItem;
 using PConfig.View.Utils;
 using System;
@@ -56,13 +57,19 @@ namespace PConfig.View
             clearParking();
             PlaceDao = PlaceDAO.getInstance();
             TotemDao = TotemDAO.getInstance();
+            MatDao = MatDAO.Instance;
             MultipanelDao = MultipanelDAO.getInstance();
+            CompteurDao = CompteurDAO.getInstance();
+
             LstPlace = PlaceDao.getAll();
             LstTotem = TotemDao.getAll();
+            LstMat = MatDao.getAll();
             LstCategoriePlace = PlaceDao.GetAllCategory();
+            LstCompteur = CompteurDao.getAll();
 
             LstAllObject.AddRange(LstPlace);
             LstAllObject.AddRange(LstTotem);
+            LstAllObject.AddRange(LstMat);
             LstMultiPanel = MultipanelDao.getAll();
             LstPlace = AssociationPlaceMultipanel(LstPlace, LstMultiPanel);
             AssocierPlaceTotem();
@@ -133,7 +140,7 @@ namespace PConfig.View
             TabItem tabGlobalBis = new TabItem();
             tabGlobalBis.Header = "Site Complet";
             NiveauGlobal NivGlobal = new NiveauGlobal(conf.ListePlan, LstAllObject, LstPlace, LstTotem);
-            NivGlobal.SelectionEventHandler += SelectionObjectTree;
+            NivGlobal.SelectionEventHandler += selectionPlan;
             tabGlobalBis.Content = NivGlobal;
             Niveaux.Items.Add(tabGlobalBis);
             LstNiveaux.Add(NivGlobal);
@@ -144,7 +151,7 @@ namespace PConfig.View
                 TabItem tab = new TabItem();
                 tab.Header = planInfo.Nom;
                 Niveau niv = new Niveau(planInfo.Path, planInfo.Nom, planInfo.Zone, LstAllObject.Where(obj => obj.ID_zone.Equals(planInfo.Zone)).ToList());
-                niv.SelectionEventHandler += SelectionObjectTree;
+                niv.SelectionEventHandler += selectionPlan;
                 tab.Content = niv;
                 Niveaux.Items.Add(tab);
                 LstNiveaux.Add(niv);
@@ -155,6 +162,7 @@ namespace PConfig.View
             cnf.OnChangeColor += ColorChanged;
             confTab.Content = cnf;
             Niveaux.Items.Add(confTab);
+
             pbStatus.Visibility = System.Windows.Visibility.Hidden;
         }
 
@@ -195,6 +203,7 @@ namespace PConfig.View
                         mode = new ModeAffichage("ID", value);
                         CbxAffichagePlace.Items.Add(mode);
                         CbxAffichageTotem.Items.Add(mode);
+                        //CbxAffichageTotem.SelectedItem = mode;
                         break;
 
                     case MODE_AFFICHAGE_OBJET.NOM:
@@ -219,14 +228,12 @@ namespace PConfig.View
                         break;
                 }
             }
+            //CbxAffichagePlace.SelectedIndex = 1;
+            //CbxAffichageTotem.SelectedIndex = 1;
         }
 
         public void CreationCompteur()
         {
-            MatDao = MatDAO.Instance;
-            LstMat = MatDao.getAll();
-            CompteurDao = CompteurDAO.getInstance();
-            LstCompteur = CompteurDao.getAll();
             foreach (Compteur cpt in LstCompteur)
             {
                 cpt.PlaceComptees = LstPlace.Where(
@@ -275,26 +282,6 @@ namespace PConfig.View
                     TotemTreeItem tree = new TotemTreeItem(tot, LstPlace.Where(pl => pl.IdTotemRadio == tot.IdTotemRadio).ToList());
                     totemHead.Items.Add(tree);
                 }
-
-                ////totem multi panel
-                //TreeViewItem MultiPanelHead = new TreeViewItem();
-                //MultiPanelHead.Header = "MultiPanel";
-                //ParkingObject.Items.Add(MultiPanelHead);
-                ////LstTotem.Sort((emp1, emp2) => emp1.IdTotemRadio.CompareTo(emp2.IdTotemRadio));
-                //foreach (Totem tot in LstTotem)
-                //{
-                //    List<Place> lstplace = LstPlace.Where(pl => (pl.IdTotemRadio == tot.IdTotemRadio && pl.ID_panels != 0) || pl.LstTotemDispalyer.ContainsValue(tot.ID_panels)).ToList();
-
-                //    TotemTreeItem tree = new TotemTreeItem(tot, lstplace);
-                //    MultiPanelHead.Items.Add(tree);
-                //}
-            }
-            else
-            {
-                TreeViewItem PlaceHead = new TreeViewItem();
-                PlaceHead.Header = "Place";
-                ParkingObject.Items.Add(PlaceHead);
-                LstPlace.ForEach(pl => PlaceHead.Items.Add(new PlaceTreeItem(pl)));
             }
 
             if (LstMat.Count > 0)
@@ -319,6 +306,7 @@ namespace PConfig.View
                     TreeViewItem cat = new TreeViewItem();
                     cat.Header = str;
                     catHead.Items.Add(cat);
+                    LstPlace.Where(pl => pl.category.Equals(str)).ToList().ForEach(pl => cat.Items.Add(new PlaceTreeItem(pl)));
                 }
             }
         }
@@ -347,6 +335,13 @@ namespace PConfig.View
                 Totem tot = (selection as TotemTreeItem).Totem;
                 LstNiveaux.ForEach(niv => niv.SelectionSmgObj(tot.ID_pan, tot.ID_mac));
                 InformationPanel.ObjetLegende = tot;
+                InformationPanel.updateAffichage();
+            }
+            else if (selection as MatTreeItem != null)
+            {
+                Mat mat = (selection as MatTreeItem).Mat;
+                LstNiveaux.ForEach(niv => niv.SelectionSmgObj(mat.ID_pan, mat.ID_mac));
+                InformationPanel.ObjetLegende = mat;
                 InformationPanel.updateAffichage();
             }
             else if (LstCategoriePlace.Contains(selection.Header.ToString()))
@@ -396,6 +391,7 @@ namespace PConfig.View
 
         private void SelectionObjectTree(object sender, EventArgs e)
         {
+            //return;
             if ((sender as SmgObjView) != null)
             {
                 int pan = (sender as SmgObjView).Pan;
@@ -448,6 +444,23 @@ namespace PConfig.View
                     }
                 }
             }
+        }
+
+        private void selectionPlan(object sender, EventArgs e)
+        {
+            if ((sender as SmgObjView) == null)
+                return;
+            int pan = (sender as SmgObjView).Pan;
+            int mac = (sender as SmgObjView).Mac;
+
+            InformationPanel.ObjetLegende = LstAllObject.Find(obj => obj.ID_pan == pan && obj.ID_mac == mac) as ILegendObject;
+            InformationPanel.updateAffichage();
+        }
+
+        private void UpdatePolice(object sender, System.Windows.RoutedPropertyChangedEventArgs<object> e)
+        {
+            SmgUtilsIHM.TAILLE_POLICE = taillePolice.Value.HasValue ? taillePolice.Value.Value : SmgUtilsIHM.TAILLE_POLICE;
+            redrawAllPlace();
         }
     }
 }

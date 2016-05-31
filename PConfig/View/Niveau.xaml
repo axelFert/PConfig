@@ -15,7 +15,7 @@
         <local:ZoomBorder x:Name="border" ClipToBounds="True" Background="Gray">
         </local:ZoomBorder>
         <StackPanel>
-            <Expander x:Name="ActionInfo" IsExpanded="False" ExpandDirection="Left" HorizontalAlignment="Right">
+            <!--<Expander x:Name="ActionInfo" IsExpanded="False" ExpandDirection="Left" HorizontalAlignment="Right">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="80" />
@@ -29,7 +29,7 @@
                     <Button Grid.Column="1" Content="Maintenance" />
                     <Button Click="ClearPlaceButton"  Grid.Column="2" Content="Clear place" />
                 </Grid>
-            </Expander>
+            </Expander>-->
             <!--<Expander x:Name="InfoExpander" IsExpanded="False" ExpandDirection="Left" HorizontalAlignment="Right" Background="#00000000" Foreground="Black" />-->
         </StackPanel>
     </Grid>

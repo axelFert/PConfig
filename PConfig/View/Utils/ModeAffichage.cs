@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PConfig.View.Utils
+﻿namespace PConfig.View.Utils
 {
     internal class ModeAffichage
     {

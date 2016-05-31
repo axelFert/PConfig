@@ -5,14 +5,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace PConfig.View
+namespace PConfig.View.ObjetPlan
 {
     internal class TotemView : SmgObjView
     {
         public double Diametre { get; set; }
         public Point Centre { get; set; }
 
-        public event EventHandler SelectionTotem;
+        //public event EventHandler SelectionTotem;
 
         protected override Geometry DefiningGeometry
         {
@@ -47,14 +47,14 @@ namespace PConfig.View
             UpdateColor();
         }
 
-        protected override void SelectObject(object sender, RoutedEventArgs e)
-        {
-            isSelected = !isSelected;
-            if (null != SelectionTotem)
-            {
-                SelectionTotem(this, new EventArgs());
-            }
-        }
+        //protected override void SelectObject(object sender, RoutedEventArgs e)
+        //{
+        //    isSelected = !isSelected;
+        //    if (null != SelectionTotem)
+        //    {
+        //        SelectionTotem(this, new EventArgs());
+        //    }
+        //}
 
         public override void UpdateState(SmgObjView sender, Boolean multiView = false)
         {

@@ -36,7 +36,7 @@ namespace PConfig.Model.DAO
             string request = "SELECT 	polecount.ID_pole_count AS Id, polecount.name AS Nom, mote.name AS NomPlace, CONCAT(sensor.ID_pan, '/', sensor.ID_mac) AS PanMacPlace" +
                 " FROM tblpole_count_has_sensors AS sensor" +
                 " INNER JOIN tblpole_counts AS polecount ON polecount.ID_pole_count = sensor.ID_pole_count" +
-                " INNER JOIN tblmotes AS mote ON (sensor.ID_mac = mote.ID_mac AND mote.id_pan = sensor.ID_pan) ORDER BY PanMacPlace,Nom";
+                " INNER JOIN tblmotes AS mote ON (sensor.ID_mac = mote.ID_mac AND mote.id_pan = sensor.ID_pan) ORDER BY Nom,PanMacPlace";
 
             MySqlTools sql = MySqlTools.getConnection();
             DataTable data = sql.executeRequest(request);

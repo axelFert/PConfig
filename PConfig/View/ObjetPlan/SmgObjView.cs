@@ -2,10 +2,9 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace PConfig.View
+namespace PConfig.View.ObjetPlan
 {
     public abstract class SmgObjView : Shape, IEquatable<SmgObjView>
     {
@@ -51,6 +50,8 @@ namespace PConfig.View
         /// </summary>
         public int Mac { get; set; }
 
+        public event EventHandler SelectionObj;
+
         protected SmgObjView()
         {
             text = new Label();
@@ -66,7 +67,14 @@ namespace PConfig.View
         /// <param name="newMode"></param>
         public abstract void updateAffichageProp(MODE_AFFICHAGE_OBJET newMode);
 
-        protected abstract void SelectObject(object sender, RoutedEventArgs e);
+        protected void SelectObject(object sender, RoutedEventArgs e)
+        {
+            isSelected = !isSelected;
+            if (SelectionObj != null)
+            {
+                SelectionObj(this, new EventArgs());
+            }
+        }
 
         public abstract void UpdateState(SmgObjView sender, Boolean multiSelect);
 

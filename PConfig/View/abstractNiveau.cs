@@ -1,4 +1,4 @@
-﻿using PConfig.Model.DAO;
+﻿using PConfig.Model;
 using PConfig.View.Utils;
 
 namespace PConfig.View

@@ -26,11 +26,12 @@ namespace PConfig.Model.DAO
         public override List<Mat> getAll()
         {
             string query =
-                "SELECT counter.ID_pole_count AS IdCompteur,counter.name AS NomCompteur,disp.name AS Afficheur,motes.name AS Nom,motes.id_pan AS IdPan,motes.id_mac AS IdMac, pole.ID_pole AS Id " +
+                //"SELECT counter.ID_pole_count AS IdCompteur,counter.name AS NomCompteur,disp.name AS Afficheur,motes.name AS Nom,motes.id_pan AS ID_pan,motes.id_mac AS ID_mac, pole.ID_pole AS Id " +
+                "SELECT counter.ID_pole_count AS IdCompteur,counter.name AS NomCompteur,disp.name AS Afficheur,motes.*, pole.ID_pole AS Id " +
                 "FROM tblpole_displays AS disp " +
                 "INNER JOIN tblpole_counts AS counter ON(disp.ID_pole_count = counter.ID_pole_count)  " +
                 "INNER JOIN tblpoles AS pole ON (disp.id_pole = pole.id_pole) " +
-                "INNER JOIN tblmotes AS motes ON(pole.ID_mac = motes.ID_mac AND pole.ID_pan = motes.id_pan)";
+                "INNER JOIN tblmotes AS motes ON(pole.ID_mac = motes.ID_mac AND pole.ID_pan = motes.id_pan) order by Id";
 
             MySqlTools sql = MySqlTools.getConnection();
             DataTable data = sql.executeRequest(query);
@@ -38,6 +39,7 @@ namespace PConfig.Model.DAO
             foreach (DataRow row in data.Rows)
             {
                 Mat panel = Constructeur<Mat>.createInstance(row);
+                panel.InitObj();
                 if (!dico.ContainsKey(panel.Id))
                 {
                     panel.AfficheursId = new List<Tuple<string, int>>();

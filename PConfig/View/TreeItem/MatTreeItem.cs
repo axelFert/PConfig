@@ -5,11 +5,11 @@ namespace PConfig.View.TreeItem
 {
     public class MatTreeItem : TreeViewItem
     {
-        private Mat Mat { get; set; }
+        public Mat Mat { get; set; }
 
         public MatTreeItem(Mat mat)
         {
-            Header = mat.Nom;
+            Header = mat.name;
             Mat = mat;
             foreach (string cpt in Mat.Afficheurs.Keys)
             {
