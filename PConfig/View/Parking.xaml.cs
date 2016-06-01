@@ -3,6 +3,7 @@ using PConfig.Model;
 using PConfig.Model.DAO;
 using PConfig.Tools;
 using PConfig.Tools.Mysql;
+using PConfig.View.Dessin;
 using PConfig.View.ObjetPlan;
 using PConfig.View.TreeItem;
 using PConfig.View.Utils;
@@ -162,6 +163,12 @@ namespace PConfig.View
             cnf.OnChangeColor += ColorChanged;
             confTab.Content = cnf;
             Niveaux.Items.Add(confTab);
+
+            TabItem dessin = new TabItem();
+            dessin.Header = "dessin !!!!";
+            OngletDessin dess = new OngletDessin();
+            dessin.Content = dess;
+            Niveaux.Items.Add(dessin);
 
             pbStatus.Visibility = System.Windows.Visibility.Hidden;
         }

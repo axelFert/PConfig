@@ -53,11 +53,12 @@ namespace PConfig.View
                 child.RenderTransform = group;
                 child.RenderTransformOrigin = new Point(0.0, 0.0);
                 MouseWheel += child_MouseWheel;
-                MouseLeftButtonDown += child_MouseLeftButtonDown;
-                MouseLeftButtonUp += child_MouseLeftButtonUp;
+                MouseDown += child_MouseDown;
+                MouseUp += child_MouseUp;
+
                 MouseMove += child_MouseMove;
-                PreviewMouseRightButtonDown += new MouseButtonEventHandler(
-                  child_PreviewMouseRightButtonDown);
+                //PreviewMouseRightButtonDown += new MouseButtonEventHandler(
+                //  child_PreviewMouseRightButtonDown);
                 Loaded += ZoomBorder_Loaded;
             }
         }
@@ -106,7 +107,7 @@ namespace PConfig.View
 
                 child.RenderTransformOrigin = new Point(0.0, 0.0); e.GetPosition(child);
                 double zoom = e.Delta > 0 ? .2 : -.2;
-                if (!(e.Delta > 0) && (st.ScaleX < .4 || st.ScaleY < .4))
+                if (!(e.Delta > 0) && (st.ScaleX < .2 || st.ScaleY < .2))
                     return;
 
                 Point relative = e.GetPosition(child);
@@ -124,24 +125,39 @@ namespace PConfig.View
             }
         }
 
-        private void child_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void child_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (child != null)
+            if (e.ChangedButton == MouseButton.Right && e.ButtonState == MouseButtonState.Pressed)
             {
-                var tt = GetTranslateTransform(child);
-                start = e.GetPosition(this);
-                origin = new Point(tt.X, tt.Y);
-                this.Cursor = Cursors.Hand;
-                child.CaptureMouse();
+                //MessageBox.Show("Middle button clicked");
+
+                if (child != null)
+                {
+                    var tt = GetTranslateTransform(child);
+                    start = e.GetPosition(this);
+                    origin = new Point(tt.X, tt.Y);
+                    this.Cursor = Cursors.Hand;
+                    child.CaptureMouse();
+                }
+            }
+            else
+            {
+                if (e.ChangedButton == MouseButton.Middle)
+                {
+                    Reset();
+                }
             }
         }
 
-        private void child_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void child_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (child != null)
+            if (e.ChangedButton == MouseButton.Right && e.ButtonState == MouseButtonState.Released)
             {
-                child.ReleaseMouseCapture();
-                this.Cursor = Cursors.Arrow;
+                if (child != null)
+                {
+                    child.ReleaseMouseCapture();
+                    this.Cursor = Cursors.Arrow;
+                }
             }
         }
 

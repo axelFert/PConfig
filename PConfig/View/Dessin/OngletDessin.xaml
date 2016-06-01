@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="PConfig.View.Dessin.OngletDessin"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PConfig.View.Dessin"
+             xmlns:LocalView="clr-namespace:PConfig.View"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ScrollViewer  VerticalScrollBarVisibility="Auto">
+            <WrapPanel Grid.Row="0" Orientation="Horizontal">
+                <Button>Charger fichier</Button>
+            </WrapPanel>
+        </ScrollViewer>
+        <LocalView:ZoomBorder x:Name="border" ClipToBounds="True" Background="Gray" Grid.Row="1" />
+    </Grid>
+</UserControl>
