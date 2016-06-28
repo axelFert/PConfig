@@ -1,0 +1,35 @@
+﻿<Window x:Class="PConfig.View.PopupNombrePlace"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PConfig.View"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Places"  Height="160"  Width="250">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0" />
+            <RowDefinition Height="42" />
+            <RowDefinition Height="42" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,10" Grid.Row="0">
+            <Label Width="180">Nombre de places en hauteur :</Label>
+            <xctk:IntegerUpDown Width="50"  Minimum="1" Value="{Binding NbPlaceHauteur,Mode=TwoWay}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0,5,0,10" Grid.Row="1">
+            <Label Width="180">Nombre de places en Largeur :</Label>
+            <xctk:IntegerUpDown Width="50"  Minimum="1" Value="{Binding NbPlaceLargeur,Mode=TwoWay}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,5,0,10" Grid.Row="2">
+            <Label Width="180">Numero de la 1ere place:</Label>
+            <xctk:IntegerUpDown Width="50"  Minimum="1" Value="{Binding NumeroPlace,Mode=TwoWay}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10" Grid.Row="3">
+            <Button Height="27" Click="ButtonOk" Width="65" Margin="0,0,10,10">OK</Button>
+            <Button Height="27" Click="ButtonCancel" Width="65" Margin="0,0,10,10">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>

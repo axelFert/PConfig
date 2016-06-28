@@ -82,6 +82,7 @@ namespace PConfig.Model
             lst.Add(new Propriete("Totem radio", NumeroTotemRadio.ToString()));
             lst.Add(new Propriete("Nombre Afficheur multipanel", LstTotemDispalyer.Count.ToString()));
             lst.Add(new Propriete("Afficheurs", string.Join(",", LstTotemDispalyer.Keys.ToArray())));
+            lst.Add(new Propriete("Hub", NumeroHub.ToString()));
 
             return lst;
         }

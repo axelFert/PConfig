@@ -36,6 +36,16 @@ namespace PConfig.View.ObjetPlan
             initObjetGraphique();
         }
 
+        public TotemView(Point centre, double diametre, int numero) : base()
+        {
+            Centre = centre;
+            Diametre = diametre;
+            IdPanel = numero;
+            text.Content = IdPanel;
+            Etat = ETAT_OBJET_PLAN.NONE_TOTEM;
+            initObjetGraphique();
+        }
+
         private void initObjetGraphique()
         {
             Stroke = new SolidColorBrush(Colors.Yellow);
@@ -46,15 +56,6 @@ namespace PConfig.View.ObjetPlan
 
             UpdateColor();
         }
-
-        //protected override void SelectObject(object sender, RoutedEventArgs e)
-        //{
-        //    isSelected = !isSelected;
-        //    if (null != SelectionTotem)
-        //    {
-        //        SelectionTotem(this, new EventArgs());
-        //    }
-        //}
 
         public override void UpdateState(SmgObjView sender, Boolean multiView = false)
         {
@@ -130,7 +131,7 @@ namespace PConfig.View.ObjetPlan
             this.text.Content = valeurAffichage;
         }
 
-        public void ObjSelect(bool select)
+        public override void ObjSelect(bool select)
         {
             if (select)
             {

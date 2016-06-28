@@ -271,6 +271,12 @@ namespace PConfig.View
                 PlaceSelectionEventHandler(objView[0], new object());
         }
 
+        public void SelectionSmgObjByHub(int Hub)
+        {
+            LstSmgObjPlan.Where(obj => obj.NumeroHub == Hub).ToList().ForEach(obj => obj.ObjSelect(true));
+            LstSmgObjPlan.Where(obj => obj.NumeroHub != Hub).ToList().ForEach(obj => obj.ObjSelect(false));
+        }
+
         public void SelectionTypePlace(string type)
         {
             foreach (UIElement child in Children)

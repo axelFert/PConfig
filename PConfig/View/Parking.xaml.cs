@@ -9,8 +9,10 @@ using PConfig.View.TreeItem;
 using PConfig.View.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -23,20 +25,25 @@ namespace PConfig.View
     {
         private List<IAbstractNiveau> LstNiveaux;
 
-        public List<Place> LstPlace { get; set; }
-        public List<Totem> LstTotem { get; set; }
-        public List<string> LstCategoriePlace { get; set; }
-        private List<SmgObj> LstAllObject = new List<SmgObj>();
-        private List<Compteur> LstCompteur { get; set; }
-        private List<Mat> LstMat { get; set; }
+        // les listes des objets
 
-        private List<Multipanel> LstMultiPanel { get; set; }
+        private List<Place> LstPlace;
+        private List<Totem> LstTotem;
+        private List<string> LstCategoriePlace;
+        private List<SmgObj> LstAllObject = new List<SmgObj>();
+        private List<Compteur> LstCompteur;
+        private List<Mat> LstMat;
+        private List<Multipanel> LstMultiPanel;
+        private List<Hub> lstHub;
+
+        // classes DAO de recupération des objets
 
         private TotemDAO TotemDao;
         private PlaceDAO PlaceDao;
         private MultipanelDAO MultipanelDao;
         private CompteurDAO CompteurDao;
         private MatDAO MatDao;
+        private HubDAO HubDao;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(NiveauGlobal));
 
@@ -61,12 +68,14 @@ namespace PConfig.View
             MatDao = MatDAO.Instance;
             MultipanelDao = MultipanelDAO.getInstance();
             CompteurDao = CompteurDAO.getInstance();
+            HubDao = HubDAO.Instance;
 
             LstPlace = PlaceDao.getAll();
             LstTotem = TotemDao.getAll();
             LstMat = MatDao.getAll();
             LstCategoriePlace = PlaceDao.GetAllCategory();
             LstCompteur = CompteurDao.getAll();
+            lstHub = HubDao.getAll();
 
             LstAllObject.AddRange(LstPlace);
             LstAllObject.AddRange(LstTotem);
@@ -119,10 +128,18 @@ namespace PConfig.View
 
         public async void chargerConf(Configuration conf)
         {
+            foreach (var planInfo in conf.ListePlan)
+            {
+                if (!File.Exists(planInfo.Path))
+                {
+                    MessageBox.Show("Erreur dans le fichier de configuration pour le fichier : " + planInfo.Path, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
             pbStatus.Visibility = System.Windows.Visibility.Visible;
             string db = (conf.isOnMasterData ? "db_smg_masterdata" : "db_smg_run");
             MySqlTools.init(conf.HostName, conf.Port, conf.Login, conf.Password, db);
-            //on clear les niveaux déjà présents
 
             // recupération des info de niveau
             List<Level> lstLvl = LevelDAO.getInstance().getAll();
@@ -278,6 +295,19 @@ namespace PConfig.View
         private void populateTreeObj()
         {
             ParkingObject.Items.Clear();
+
+            if (lstHub.Count > 0)
+            {
+                TreeViewItem HubHead = new TreeViewItem();
+                HubHead.Header = "Hub";
+                ParkingObject.Items.Add(HubHead);
+                foreach (Hub hub in lstHub)
+                {
+                    HubTreeItem tree = new HubTreeItem(hub);
+                    HubHead.Items.Add(tree);
+                }
+            }
+
             if (LstTotem.Count > 0)
             {
                 // totem radio
@@ -349,6 +379,13 @@ namespace PConfig.View
                 Mat mat = (selection as MatTreeItem).Mat;
                 LstNiveaux.ForEach(niv => niv.SelectionSmgObj(mat.ID_pan, mat.ID_mac));
                 InformationPanel.ObjetLegende = mat;
+                InformationPanel.updateAffichage();
+            }
+            else if (selection as HubTreeItem != null)
+            {
+                Hub hub = (selection as HubTreeItem).Hub;
+                LstNiveaux.ForEach(niv => niv.SelectionSmgObjByHub(hub.Numero));
+                InformationPanel.ObjetLegende = hub;
                 InformationPanel.updateAffichage();
             }
             else if (LstCategoriePlace.Contains(selection.Header.ToString()))

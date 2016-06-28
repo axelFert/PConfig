@@ -74,7 +74,7 @@
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="Police" FontSize="15" Margin=" 0,0,10,0">
+            <GroupBox Header="Police" FontSize="15" Margin=" 0,0,10,0" Visibility="Hidden">
                 <GroupBox.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                         <GradientStop Color="Black" Offset="0" />

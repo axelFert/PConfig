@@ -1,4 +1,5 @@
-﻿using PConfig.View.Utils;
+﻿using PConfig.Tools;
+using PConfig.View.Utils;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,6 +46,8 @@ namespace PConfig.View.ObjetPlan
         /// </summary>
         public int Pan { get; set; }
 
+        public int NumeroHub { get { return ((Pan & SmgUtil.MASQUE_HUB_PAN) / 16 / 16) - 1; } }
+
         /// <summary>
         /// mac de l'objet
         /// </summary>
@@ -75,6 +78,8 @@ namespace PConfig.View.ObjetPlan
                 SelectionObj(this, new EventArgs());
             }
         }
+
+        public abstract void ObjSelect(bool select);
 
         public abstract void UpdateState(SmgObjView sender, Boolean multiSelect);
 

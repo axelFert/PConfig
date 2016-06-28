@@ -1,11 +1,8 @@
 ﻿using PConfig.Conf;
 using PConfig.Model;
-using PConfig.Model.DAO;
-using PConfig.View.ObjetPlan;
 using PConfig.View.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -184,6 +181,11 @@ namespace PConfig.View
         public void SelectionTypePlace(string type)
         {
             AllPlan.ForEach(pln => pln.SelectionTypePlace(type));
+        }
+
+        public void SelectionSmgObjByHub(int Hub)
+        {
+            AllPlan.ForEach(pln => pln.SelectionSmgObjByHub(Hub));
         }
     }
 }

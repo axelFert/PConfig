@@ -1,4 +1,6 @@
-﻿namespace PConfig.Model
+﻿using PConfig.Tools;
+
+namespace PConfig.Model
 {
     /// <summary>
     /// Class abstraite SMG represenatant les motes/totem depuis la table db_smg_run tblmotes
@@ -34,6 +36,8 @@
         public string category { get; set; }
         public int ID_zone { get; set; }
         public string polygon { get; set; }
+
+        public int NumeroHub { get { return ((ID_pan & SmgUtil.MASQUE_HUB_PAN) / 16 / 16) - 1; } }
 
         /// <summary> Id auqel est relie l'objet en radio (pan + (mac & 0xff00) ) </summary>
         public int IdTotemRadio { get; set; }

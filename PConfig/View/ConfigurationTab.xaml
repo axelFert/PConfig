@@ -9,12 +9,12 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <StackPanel Name="ConfigurationStack">
-            <GroupBox Header="Configuration couleur">
+            <GroupBox Header="Couleurs">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Label Grid.Column="0" Width="120">Couleur Mat</Label>
                         <xctk:ColorPicker Name="CouleurPickerMat" Width="100"></xctk:ColorPicker>
-                        <Button Grid.Column="2" Name="ChangeMatColor" Click="UpdatePlaceColor">Appliquer</Button>
+                        <Button Grid.Column="2" Name="ChangeMatColor" Click="UpdateMatColor">Appliquer</Button>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
@@ -28,6 +28,30 @@
                         <xctk:ColorPicker Name="CouleurPickerPlace" Width="100"></xctk:ColorPicker>
                         <Button Grid.Column="2" Name="ChangePlaceColor" Click="UpdatePlaceColor">Appliquer</Button>
                     </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Configuration ">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Label Grid.Column="0" Width="120">Diametre Totem</Label>
+                        <xctk:IntegerUpDown Name="TotemDiametre" Value="{Binding DiametreTotem ,Mode=TwoWay}"></xctk:IntegerUpDown>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Label Grid.Column="0" Width="120">Coté Mat</Label>
+                        <xctk:IntegerUpDown Name="MatCote" Value="{Binding CoteMat ,Mode=TwoWay}"></xctk:IntegerUpDown>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox>
+                <GroupBox.Header>
+                    <CheckBox Name="TailleAutomatique" IsChecked="{Binding TailleAuto ,Mode=TwoWay}">Police Automatique</CheckBox>
+                </GroupBox.Header>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10" IsEnabled="{Binding TailleAuto}">
+                    <Label Grid.Column="0" Width="120">Taille Police</Label>
+                    <xctk:IntegerUpDown Value="{Binding taillePolice ,Mode=TwoWay}" Minimum="1" />
                 </StackPanel>
             </GroupBox>
         </StackPanel>

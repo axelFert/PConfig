@@ -71,7 +71,7 @@ namespace PConfig.Model.DAO
 
         public override List<Place> getAll()
         {
-            string request = "Select m.*,p.id_panel as NumeroTotemRadio from tblmotes as m INNER JOIN db_smg_run.tblpanels AS p ON p.id_pan = m.id_pan AND p.ID_mac = (m.ID_mac & 0xff00) where type = 'sensor' ";
+            string request = "Select m.*,p.id_panel as NumeroTotemRadio from tblmotes as m INNER JOIN tblpanels AS p ON p.id_pan = m.id_pan AND p.ID_mac = (m.ID_mac & 0xff00) where type = 'sensor' ";
             MySqlTools sql = MySqlTools.getConnection();
             List<Place> lstPlace = new List<Place>();
 

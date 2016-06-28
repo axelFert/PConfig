@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Threading;
 
 namespace PConfig.View
 {
@@ -205,6 +204,11 @@ namespace PConfig.View
         public void SelectionSmgObj(int pan, int mac)
         {
             DrawCanvas.SelectionSmgObj(pan, mac);
+        }
+
+        public void SelectionSmgObjByHub(int hub)
+        {
+            DrawCanvas.SelectionSmgObjByHub(hub);
         }
 
         public void UpdateColor()

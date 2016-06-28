@@ -38,18 +38,22 @@ namespace PConfig.View.ObjetPlan
             lstPanMac = mat.Afficheurs.Values.ToList().SelectMany(cp => cp.LstPanMac).ToList();
 
             Etat = ETAT_OBJET_PLAN.NONE_MAT;
-            initObjetGraphique(mat);
+            initObjetGraphique(new Point(mat.XCentre, mat.YCentre), mat.TailleCote);
         }
 
-        private void initObjetGraphique(Mat mat)
+        public MatView(Point centre, double cote, int numero) : base()
         {
-            this.sommetA = new Point(mat.XCentre, mat.YCentre - (mat.TailleCote * 2 / 3));
-            this.sommetB = new Point(mat.XCentre + (mat.TailleCote / 2), mat.YCentre + (mat.TailleCote / 3));
-            this.sommetC = new Point(mat.XCentre - (mat.TailleCote / 2), mat.YCentre + (mat.TailleCote / 3));
+            Etat = ETAT_OBJET_PLAN.NONE_MAT;
+            IdPanel = numero;
+            text.Content = IdPanel;
+            initObjetGraphique(centre, cote);
+        }
 
-            //this.sommetA = new Point(50, 40);
-            //this.sommetB = new Point(60, 50);
-            //this.sommetC = new Point(40, 50);
+        private void initObjetGraphique(Point centre, double cote)
+        {
+            this.sommetA = new Point(centre.X, centre.Y - (cote * 2 / 3));
+            this.sommetB = new Point(centre.X + (cote / 2), centre.Y + (cote / 3));
+            this.sommetC = new Point(centre.X - (cote / 2), centre.Y + (cote / 3));
 
             pathGeometry = new PathGeometry();
 
@@ -72,8 +76,9 @@ namespace PConfig.View.ObjetPlan
             Stroke = new SolidColorBrush(Colors.Yellow);
             Fill = new SolidColorBrush(Color.FromArgb(150, 0, 150, 0));
             StrokeThickness = 2;
-            //text.SetValue(Canvas.LeftProperty, sommetA.Y);
-            //text.SetValue(Canvas.TopProperty, sommetC.X);
+
+            text.SetValue(Canvas.LeftProperty, centre.X - cote / 2);
+            text.SetValue(Canvas.TopProperty, centre.Y);
 
             UpdateColor();
         }
@@ -95,7 +100,7 @@ namespace PConfig.View.ObjetPlan
             }
         }
 
-        public void ObjSelect(bool select)
+        public override void ObjSelect(bool select)
         {
             if (select)
             {

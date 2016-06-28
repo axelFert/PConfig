@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using static PConfig.Tools.SmgUtil;
 
 namespace PConfig.View.Utils
@@ -23,6 +22,11 @@ namespace PConfig.View.Utils
         public static bool IS_NEGATIF = false;
 
         public static bool IS_RADIO_LINK = false;
+
+        public static int DIAMETRE_TOTEM = 20;
+        public static int COTE_MAT = 020;
+
+        public static bool TAILLE_POLICE_AUTO = true;
     }
 
     /// <summary>
@@ -38,5 +42,15 @@ namespace PConfig.View.Utils
     public enum MODE_AFFICHAGE_OBJET
     {
         NOM, PAN_MAC, ID, NOMBRE_PLACE, TYPE
+    }
+
+    public enum TYPE_DESSIN
+    {
+        PLACE, TOTEM, MAT, LIBRE
+    }
+
+    public enum ETAT_PLAN
+    {
+        VERIFICATION, CREATION, MODIFICATION
     }
 }

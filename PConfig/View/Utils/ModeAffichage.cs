@@ -16,4 +16,21 @@
             return NomMode;
         }
     }
+
+    internal class TypeDessin
+    {
+        private string NomMode;
+        public TYPE_DESSIN Mode { get; }
+
+        public TypeDessin(string nom, TYPE_DESSIN mode)
+        {
+            NomMode = nom;
+            Mode = mode;
+        }
+
+        public override string ToString()
+        {
+            return NomMode;
+        }
+    }
 }

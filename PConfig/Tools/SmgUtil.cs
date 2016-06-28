@@ -11,6 +11,7 @@ namespace PConfig.Tools
     /// </summary>
     public static class SmgUtil
     {
+        public static int MASQUE_HUB_PAN = 0xf00;
         public static int MASQUE_TOTEM_RADIO_MAC = 0xff00;
         public static int MASQUE_NUMERO_PLACE_MAC = 0x00ff;
 

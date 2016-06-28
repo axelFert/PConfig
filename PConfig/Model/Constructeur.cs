@@ -30,6 +30,20 @@ namespace PConfig.Model
             return instance;
         }
 
+        public static T createInstanceFields(DataRow row)
+        {
+            Type type = typeof(T);
+            ConstructorInfo ctor = type.GetConstructor(new Type[0]);
+            T instance = (T)(ctor.Invoke(new object[0]));
+
+            foreach (FieldInfo field in type.GetFields(BindingFlags.NonPublic|BindingFlags.Instance))
+            {
+                if (row.Table.Columns.Contains(field.Name))
+                    field.SetValue(instance, Convert.ChangeType(row[field.Name], field.FieldType));
+            }
+            return instance;
+        }
+
         private Constructeur()
         {
         }

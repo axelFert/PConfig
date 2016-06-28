@@ -23,6 +23,12 @@ namespace PConfig.View
         void SelectionSmgObj(int pan, int mac);
 
         /// <summary>
+        /// Selection d'un hub dans le menu
+        /// </summary>
+        /// <param name="hub"></param>
+        void SelectionSmgObjByHub(int Hub);
+
+        /// <summary>
         /// mise a jour des couleur des place
         /// </summary>
         void UpdateColor();
