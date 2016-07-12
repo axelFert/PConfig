@@ -1,8 +1,10 @@
 ﻿using PConfig.Conf;
 using PConfig.Model;
+using PConfig.View.ObjetPlan;
 using PConfig.View.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -19,7 +21,6 @@ namespace PConfig.View
         public List<Totem> LstTotem { get; set; }
         private List<SmgObj> LstAllObject = new List<SmgObj>();
         private List<Compteur> LstCompteur { get; set; }
-
         private List<Multipanel> LstMultiPanel { get; set; }
 
         public event EventHandler SelectionEventHandler;
@@ -186,6 +187,32 @@ namespace PConfig.View
         public void SelectionSmgObjByHub(int Hub)
         {
             AllPlan.ForEach(pln => pln.SelectionSmgObjByHub(Hub));
+        }
+
+        public void SelectionFrequence(int frequence)
+        {
+            AllPlan.ForEach(pln => pln.SelectionFrequence(frequence));
+        }
+
+        public int getNbTotemSelect()
+        {
+            int count = 0;
+            AllPlan.ForEach(pln => count += pln.getSelected().Where(obj => (obj as TotemView) != null).Count());
+            return count;
+        }
+
+        public int getNbMatSelect()
+        {
+            int count = 0;
+            AllPlan.ForEach(pln => count += pln.getSelected().Where(obj => (obj as MatView) != null).Count());
+            return count;
+        }
+
+        public int getNbPlaceSelect()
+        {
+            int count = 0;
+            AllPlan.ForEach(pln => count += pln.getSelected().Where(obj => (obj as PlaceView) != null).Count());
+            return count;
         }
     }
 }

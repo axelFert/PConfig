@@ -19,8 +19,9 @@ namespace PConfig.View.ObjetPlan
         public bool isHighlighted { get; set; }
 
         public string Category { get; }
-
         public Dictionary<int, int> LstTotemDispalyer { get; set; }
+
+        private double myfont;
 
         protected override Geometry DefiningGeometry
         {
@@ -49,7 +50,6 @@ namespace PConfig.View.ObjetPlan
             text.Content = Category;
             Etat = ETAT_OBJET_PLAN.NONE_PLACE;
             initObjetGraphique(place);
-            text.FontSize = (Height / 3) * 72 / 96;
         }
 
         public PlaceView(int numero) : base()
@@ -65,10 +65,13 @@ namespace PConfig.View.ObjetPlan
             //propriere graphique
             Corner = top;
             Width = width;
-            text.Width = width;
+
             Height = height;
-            text.Height = height;
+
             Angle = rotation;
+
+            text.Width = (Height < Width ? Height : Width) / 2;
+            text.Height = (Height < Width ? Height : Width) / 2;
 
             // ugly mais plus facile que de faire du binding de différent objet sur un même canvas
             SetValue(Canvas.LeftProperty, Corner.X);
@@ -79,7 +82,8 @@ namespace PConfig.View.ObjetPlan
 
             LayoutTransform = new RotateTransform(Angle, 0, height / 2.0);
             text.LayoutTransform = new RotateTransform(Angle + 90, 0, height / 2.0);
-            text.FontSize = (Height / 3) * 72 / 96;
+            myfont = ((Height < Width ? Height : Width) / 3) * 72 / 96;
+
             UpdateColor();
         }
 
@@ -88,10 +92,13 @@ namespace PConfig.View.ObjetPlan
             //propriere graphique
             Corner = new Point(place.X, place.Y);
             Width = place.Longueur;
-            text.Width = place.Longueur;
+
             Height = place.Hauteur;
-            text.Height = place.Hauteur;
+
             Angle = place.Angle;
+
+            text.Width = Width;
+            text.Height = Height;
 
             // ugly mais plus facile que de faire du binding de différent objet sur un même canvas
             SetValue(Canvas.LeftProperty, Corner.X);
@@ -102,7 +109,7 @@ namespace PConfig.View.ObjetPlan
 
             LayoutTransform = new RotateTransform(Angle);
             text.LayoutTransform = new RotateTransform(Angle);
-            text.FontSize = (Height / 3) * 72 / 96;
+            myfont = ((Height < Width ? Height : Width) / 3) * 72 / 96;
             UpdateColor();
         }
 
@@ -247,7 +254,7 @@ namespace PConfig.View.ObjetPlan
         public override void UpdateColor()
         {
             if (SmgUtilsIHM.TAILLE_POLICE_AUTO)
-                text.FontSize = (Height / 3) * 72 / 96;
+                text.FontSize = myfont;
             else
                 text.FontSize = SmgUtilsIHM.TAILLE_POLICE;
 
@@ -258,7 +265,6 @@ namespace PConfig.View.ObjetPlan
                 Stroke = new SolidColorBrush(colors.CouleurBordure);
                 StrokeThickness = SmgUtilsIHM.EPAISSEUR_TRAIT;
                 text.Foreground = new SolidColorBrush(colors.CouleurBordure);
-                //text.FontSize = SmgUtilsIHM.TAILLE_POLICE;
             }
         }
     }

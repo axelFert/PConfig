@@ -25,7 +25,7 @@ namespace PConfig.View.ObjetPlan
         public TotemView(Totem totem) : base()
         {
             this.Centre = new Point(totem.XCentre, totem.YCentre);
-            Diametre = totem.Diametre;
+            Diametre = SmgUtilsIHM.DIAMETRE_TOTEM;
             NameObj = totem.name;
             this.Pan = totem.ID_pan;
             this.Mac = totem.ID_mac;

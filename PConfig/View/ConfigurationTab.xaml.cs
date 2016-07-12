@@ -1,4 +1,5 @@
-﻿using PConfig.View.Utils;
+﻿using PConfig.Tools;
+using PConfig.View.Utils;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -53,6 +54,9 @@ namespace PConfig.View
             coteMat = SmgUtilsIHM.COTE_MAT;
             diametreTotem = SmgUtilsIHM.DIAMETRE_TOTEM;
             InitializeComponent();
+            CouleurPickerMat.SelectedColor = SmgUtilsIHM.getColorEtat(ETAT_OBJET_PLAN.NONE_MAT).CouleurBordure;
+            CouleurPickerTotem.SelectedColor = SmgUtilsIHM.getColorEtat(ETAT_OBJET_PLAN.NONE_TOTEM).CouleurBordure;
+            CouleurPickerPlace.SelectedColor = SmgUtilsIHM.getColorEtat(ETAT_OBJET_PLAN.NONE_PLACE).CouleurBordure;
         }
 
         // The delegate procedure we are assigning to our object
@@ -95,6 +99,11 @@ namespace PConfig.View
         private void RaisePropertyChanged(string propName)
         {
             PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
+
+        private void SavegarderConf(object sender, RoutedEventArgs e)
+        {
+            XmlParser.sauvegarderConf("ConfSites.xml");
         }
     }
 }

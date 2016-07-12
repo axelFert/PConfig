@@ -4,6 +4,7 @@ using PConfig.View.ObjetPlan;
 using PConfig.View.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -219,6 +220,26 @@ namespace PConfig.View
         public void SelectionTypePlace(string type)
         {
             DrawCanvas.SelectionTypePlace(type);
+        }
+
+        public void SelectionFrequence(int frequence)
+        {
+            DrawCanvas.SelectionFrequence(frequence);
+        }
+
+        public int getNbTotemSelect()
+        {
+            return DrawCanvas.getSelected().Where(obj => (obj as TotemView) != null).Count();
+        }
+
+        public int getNbMatSelect()
+        {
+            return DrawCanvas.getSelected().Where(obj => (obj as MatView) != null).Count();
+        }
+
+        public int getNbPlaceSelect()
+        {
+            return DrawCanvas.getSelected().Where(obj => (obj as PlaceView) != null).Count();
         }
     }
 }

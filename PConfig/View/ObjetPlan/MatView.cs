@@ -38,7 +38,7 @@ namespace PConfig.View.ObjetPlan
             lstPanMac = mat.Afficheurs.Values.ToList().SelectMany(cp => cp.LstPanMac).ToList();
 
             Etat = ETAT_OBJET_PLAN.NONE_MAT;
-            initObjetGraphique(new Point(mat.XCentre, mat.YCentre), mat.TailleCote);
+            initObjetGraphique(new Point(mat.XCentre, mat.YCentre), SmgUtilsIHM.COTE_MAT);
         }
 
         public MatView(Point centre, double cote, int numero) : base()
@@ -109,7 +109,7 @@ namespace PConfig.View.ObjetPlan
             }
             else {
                 isSelected = false;
-                Etat = ETAT_OBJET_PLAN.NONE_TOTEM;
+                Etat = ETAT_OBJET_PLAN.NONE_MAT;
             }
             UpdateColor();
         }
@@ -118,7 +118,7 @@ namespace PConfig.View.ObjetPlan
         {
             if (!multiView)
             {
-                Etat = ETAT_OBJET_PLAN.NONE_TOTEM;
+                Etat = ETAT_OBJET_PLAN.NONE_MAT;
                 isSelected = false;
             }
 

@@ -38,5 +38,17 @@ namespace PConfig.View
         /// </summary>
         /// <param name="type"></param>
         void SelectionTypePlace(string type);
+
+        /// <summary>
+        /// Selection de tout les éléments d'une même fréquence
+        /// </summary>
+        /// <param name="frequence">la fréquence a séléctionner</param>
+        void SelectionFrequence(int frequence);
+
+        int getNbTotemSelect();
+
+        int getNbMatSelect();
+
+        int getNbPlaceSelect();
     }
 }

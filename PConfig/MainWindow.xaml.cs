@@ -21,7 +21,7 @@ namespace PConfig
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger
         (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public Configuration myConf { get; set; }
+        public ConfigurationSite myConf { get; set; }
 
         public MainWindow()
         {
@@ -29,6 +29,7 @@ namespace PConfig
             InitializeComponent();
             this.Title = "pConfig " + Properties.Settings.Default.version;
             InitGlobalVariable();
+            InitConf();
         }
 
         private void ClickOpenFile(object sender, RoutedEventArgs e)
@@ -36,7 +37,7 @@ namespace PConfig
             //selection du site a charger
             PopupConfiguration popup = new PopupConfiguration();
             popup.ShowDialog();
-            Configuration conf = popup.selectedConf;
+            ConfigurationSite conf = popup.selectedConf;
 
             if (conf != null)
             {
@@ -51,6 +52,17 @@ namespace PConfig
         }
 
         #region misc
+
+        private void InitConf()
+        {
+            Configuration Conf = XmlParser.GetConfig("ConfSites.xml");
+            SmgUtilsIHM.getColorEtat(ETAT_OBJET_PLAN.NONE_MAT).CouleurBordure = (Color)ColorConverter.ConvertFromString(Conf.CouleurMat);
+            SmgUtilsIHM.getColorEtat(ETAT_OBJET_PLAN.NONE_TOTEM).CouleurBordure = (Color)ColorConverter.ConvertFromString(Conf.CouleurTotem);
+            SmgUtilsIHM.getColorEtat(ETAT_OBJET_PLAN.NONE_PLACE).CouleurBordure = (Color)ColorConverter.ConvertFromString(Conf.CouleurPlace);
+
+            SmgUtilsIHM.COTE_MAT = Conf.TailleMat;
+            SmgUtilsIHM.DIAMETRE_TOTEM = Conf.TailleTotem;
+        }
 
         private void InitGlobalVariable()
         {

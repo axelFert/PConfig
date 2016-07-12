@@ -126,7 +126,7 @@ namespace PConfig.View
             LstAllObject.Clear();
         }
 
-        public async void chargerConf(Configuration conf)
+        public async void chargerConf(ConfigurationSite conf)
         {
             foreach (var planInfo in conf.ListePlan)
             {
@@ -181,11 +181,13 @@ namespace PConfig.View
             confTab.Content = cnf;
             Niveaux.Items.Add(confTab);
 
+#if DEBUG
             TabItem dessin = new TabItem();
             dessin.Header = "dessin !!!!";
             OngletDessin dess = new OngletDessin();
             dessin.Content = dess;
             Niveaux.Items.Add(dessin);
+#endif
 
             pbStatus.Visibility = System.Windows.Visibility.Hidden;
         }
@@ -307,7 +309,6 @@ namespace PConfig.View
                     HubHead.Items.Add(tree);
                 }
             }
-
             if (LstTotem.Count > 0)
             {
                 // totem radio
@@ -333,6 +334,22 @@ namespace PConfig.View
                 }
             }
 
+            if (LstPlace.Count > 0)
+            {
+                TreeViewItem FreqHeader = new TreeViewItem();
+                FreqHeader.Header = "Fréquences";
+                ParkingObject.Items.Add(FreqHeader);
+                List<int> frequencelst = new List<int>();
+                foreach (Place pl in LstPlace)
+                {
+                    if (!frequencelst.Contains(pl.Frequence))
+                    {
+                        frequencelst.Add(pl.Frequence);
+                    }
+                }
+                frequencelst.Sort();
+                frequencelst.ForEach(freq => FreqHeader.Items.Add(new FrequenceTreeItem(freq)));
+            }
             if (LstCategoriePlace.Count > 0)
             {
                 TreeViewItem catHead = new TreeViewItem();
@@ -385,18 +402,49 @@ namespace PConfig.View
             {
                 Hub hub = (selection as HubTreeItem).Hub;
                 LstNiveaux.ForEach(niv => niv.SelectionSmgObjByHub(hub.Numero));
+
                 InformationPanel.ObjetLegende = hub;
+                InformationPanel.updateAffichage();
+            }
+            else if (selection as FrequenceTreeItem != null)
+            {
+                int freq = (selection as FrequenceTreeItem).Frequence;
+                LstNiveaux.ForEach(niv => niv.SelectionFrequence(freq));
+
+                LegendeObj legende = new LegendeObj();
+                List<Propriete> lst = new List<Propriete>();
+                lst.Add(new Propriete("Mat", ((Niveaux.SelectedItem as TabItem).Content as IAbstractNiveau).getNbMatSelect().ToString()));
+                lst.Add(new Propriete("Totem", ((Niveaux.SelectedItem as TabItem).Content as IAbstractNiveau).getNbTotemSelect().ToString()));
+                lst.Add(new Propriete("Grain", ((Niveaux.SelectedItem as TabItem).Content as IAbstractNiveau).getNbPlaceSelect().ToString()));
+                legende.props = lst;
+                legende.type = "Fréquence";
+                legende.nom = freq.ToString();
+
+                InformationPanel.ObjetLegende = legende;
                 InformationPanel.updateAffichage();
             }
             else if (LstCategoriePlace.Contains(selection.Header.ToString()))
             {
                 // selection de toutes les places de ce type
                 LstNiveaux.ForEach(niv => niv.SelectionTypePlace(selection.Header.ToString()));
-                InformationPanel.ObjetLegende = null;
+
+                LegendeObj legende = new LegendeObj();
+                List<Propriete> lst = new List<Propriete>();
+                lst.Add(new Propriete("Grain", ((Niveaux.SelectedItem as TabItem).Content as IAbstractNiveau).getNbPlaceSelect().ToString()));
+                legende.props = lst;
+                legende.type = "Type place";
+                legende.nom = selection.Header.ToString();
+
+                InformationPanel.ObjetLegende = legende;
                 InformationPanel.updateAffichage();
             }
         }
 
+        /// <summary>
+        /// deprecated
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BoutonNegatif_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             ColorState colors = null;

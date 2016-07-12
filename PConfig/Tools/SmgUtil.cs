@@ -12,6 +12,7 @@ namespace PConfig.Tools
     public static class SmgUtil
     {
         public static int MASQUE_HUB_PAN = 0xf00;
+        public static int MASQUE_FREQUENCE = 0x0ff;
         public static int MASQUE_TOTEM_RADIO_MAC = 0xff00;
         public static int MASQUE_NUMERO_PLACE_MAC = 0x00ff;
 
@@ -83,6 +84,26 @@ namespace PConfig.Tools
             }
 
             return imgResult;
+        }
+
+        public static String HexConverter(System.Windows.Media.Color c)
+        {
+            return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
+        }
+
+        public static String HexConverter(System.Drawing.Color c)
+        {
+            return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
+        }
+
+        public static String RGBConverter(System.Drawing.Color c)
+        {
+            return "RGB(" + c.R.ToString() + "," + c.G.ToString() + "," + c.B.ToString() + ")";
+        }
+
+        public static String RGBConverter(System.Windows.Media.Color c)
+        {
+            return "RGB(" + c.R.ToString() + "," + c.G.ToString() + "," + c.B.ToString() + ")";
         }
     }
 

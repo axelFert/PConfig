@@ -1,34 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace PConfig.Conf
 {
     public class Configuration
     {
-        public string NomSite { get; set; }
-
-        /// <summary>
-        /// Tuple avec le nom et l'adresse du niveau
-        /// </summary>
-        public List<PlanInfo> ListePlan { get; set; }
-
-        public string HostName { get; set; }
-
-        public string Port { get; set; }
-
-        public string Login { get; set; }
-
-        public string Password { get; set; }
-
-        public bool isOnMasterData { get; set; }
-
-        public Configuration()
-        {
-            ListePlan = new List<PlanInfo>();
-        }
-
-        public override string ToString()
-        {
-            return NomSite;
-        }
+        public List<ConfigurationSite> LstSite { get; set; }
+        public string CouleurMat { get; set; }
+        public int TailleMat { get; set; }
+        public string CouleurTotem { get; set; }
+        public int TailleTotem { get; set; }
+        public string CouleurPlace { get; set; }
     }
 }

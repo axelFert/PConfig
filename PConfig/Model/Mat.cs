@@ -34,7 +34,6 @@ namespace PConfig.Model
             string[] dim = this.polygon.Split(',');
             XCentre = Double.Parse(dim[0]);
             YCentre = Double.Parse(dim[1]);
-            TailleCote = 15;
         }
 
         public List<Propriete> GetInfo()

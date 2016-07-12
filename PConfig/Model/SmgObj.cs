@@ -37,7 +37,13 @@ namespace PConfig.Model
         public int ID_zone { get; set; }
         public string polygon { get; set; }
 
+        /// <summary>
+        /// Recuperation du numéro de hub la double division par 16 permet de récuperer le numero (1
+        /// 2 3 4) le -1 car les hub commencent a 0
+        /// </summary>
         public int NumeroHub { get { return ((ID_pan & SmgUtil.MASQUE_HUB_PAN) / 16 / 16) - 1; } }
+
+        public int Frequence { get { return (ID_pan & SmgUtil.MASQUE_FREQUENCE); } }
 
         /// <summary> Id auqel est relie l'objet en radio (pan + (mac & 0xff00) ) </summary>
         public int IdTotemRadio { get; set; }

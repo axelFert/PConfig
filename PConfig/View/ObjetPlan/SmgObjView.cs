@@ -46,7 +46,13 @@ namespace PConfig.View.ObjetPlan
         /// </summary>
         public int Pan { get; set; }
 
+        /// <summary>
+        /// Recuperation du numéro de hub la double division par 16 permet de récuperer le numero (1
+        /// 2 3 4) le -1 car les hub commencent a 0
+        /// </summary>
         public int NumeroHub { get { return ((Pan & SmgUtil.MASQUE_HUB_PAN) / 16 / 16) - 1; } }
+
+        public int Frequence { get { return (Pan & SmgUtil.MASQUE_FREQUENCE); } }
 
         /// <summary>
         /// mac de l'objet
@@ -58,6 +64,7 @@ namespace PConfig.View.ObjetPlan
         protected SmgObjView()
         {
             text = new Label();
+            text.Padding = new Thickness(1);
             MouseLeftButtonDown += SelectObject;
             text.MouseLeftButtonDown += SelectObject;
             isSelected = false;

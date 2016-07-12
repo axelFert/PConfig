@@ -301,6 +301,21 @@ namespace PConfig.View
             }
         }
 
+        internal void SelectionFrequence(int frequence)
+        {
+            foreach (UIElement child in Children)
+            {
+                SmgObjView obj = child as SmgObjView; // only one cast
+                if (obj != null)
+                {
+                    if (obj.Frequence == frequence)
+                        obj.ObjSelect(true);
+                    else
+                        obj.ObjSelect(false);
+                }
+            }
+        }
+
         public List<SmgObjView> getSelected()
         {
             List<SmgObjView> lstRetour = new List<SmgObjView>();
